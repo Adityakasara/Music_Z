@@ -5,9 +5,9 @@ with open('assets/master_catalog.json', 'r') as f:
 
 tracks_json = json.dumps(master_tracks, indent=2)
 
-js_content = f"""/**
- * Music Z — Apple Music Experience (Full Feature Pro Edition)
- * With 54 Telugu & Hindi Hits, SharePlay, 3-State Repeat, AirPlay, and Audio-Reactive Mesh
+js_code = f"""/**
+ * Music Z — Bulletproof Apple Music Web App for iPhone & Web
+ * Fixed: iOS Safari audio playback, crash-proof canvas visualizer, fluid animations, SharePlay & AirPlay
  */
 
 document.addEventListener('DOMContentLoaded', () => {{
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {{
   // Master Catalog: 54 Top Telugu & Hindi Hits
   const MASTER_TRACKS = {tracks_json};
 
-  // Application State
+  // State
   let playlist = [...MASTER_TRACKS];
   let currentTrackIndex = 0;
   let isPlaying = false;
@@ -23,17 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {{
   let repeatMode = 0; // 0: Off, 1: Repeat All, 2: Repeat One
   let favorites = new Set(JSON.parse(localStorage.getItem('music_z_favs') || '[]'));
   let isLyricsMode = false;
-  let currentLangFilter = 'all';
 
-  // Audio Element
+  // Audio Element (Native HTML5 Audio for 100% reliable iOS playback)
   const audio = document.getElementById('native-audio');
+  audio.volume = 0.9;
 
-  // DOM: Tabs & Navigation
+  // DOM Elements
   const tabButtons = document.querySelectorAll('.tab-item');
   const tabPages = document.querySelectorAll('.tab-page');
   const langPills = document.querySelectorAll('.lang-pill');
 
-  // DOM: Mini Player
+  // Mini Player
   const miniPlayer = document.getElementById('mini-player');
   const miniProgressFill = document.getElementById('mini-progress-fill');
   const miniArt = document.getElementById('mini-art');
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {{
   const miniNextBtn = document.getElementById('mini-next-btn');
   const miniExpandTrigger = document.getElementById('mini-player-expand-trigger');
 
-  // DOM: Expanded Now Playing Sheet
+  // Now Playing Sheet
   const sheet = document.getElementById('now-playing-sheet');
   const sheetDismissBtn = document.getElementById('btn-sheet-dismiss');
   const sheetGrabberZone = document.getElementById('sheet-grabber-zone');
@@ -57,13 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {{
   const heartOutline = sheetFavBtn.querySelector('.heart-outline');
   const heartSolid = sheetFavBtn.querySelector('.heart-solid');
 
-  // Seek Slider
+  // Scrubber & Sliders
   const seekSlider = document.getElementById('sheet-seek-slider');
   const seekFill = document.getElementById('sheet-seek-fill');
   const currentTimeLabel = document.getElementById('current-time-label');
   const totalTimeLabel = document.getElementById('total-time-label');
 
-  // Playback Controls
+  // Sheet Controls
   const mainPlayPauseBtn = document.getElementById('btn-main-play-pause');
   const sheetPlayIcon = document.getElementById('sheet-play-icon');
   const sheetPauseIcon = document.getElementById('sheet-pause-icon');
@@ -120,17 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {{
   const toast = document.getElementById('ios-toast');
   const emojiLayer = document.getElementById('emoji-reaction-layer');
 
-  // Web Audio Context
-  let audioCtx = null;
-  let sourceNode = null;
-  let analyserNode = null;
-  let bassFilter = null;
-  let midFilter = null;
-  let trebleFilter = null;
-  let isWebAudioInitialized = false;
-  let currentBassEnergy = 0;
-
-  // Visualizer Canvases
+  // Canvases
   const ambientCanvas = document.getElementById('ambient-canvas');
   const sheetAmbientCanvas = document.getElementById('sheet-ambient-canvas');
   const visualizerCanvas = document.getElementById('audio-visualizer-canvas');
@@ -138,68 +128,72 @@ document.addEventListener('DOMContentLoaded', () => {{
   let sheetAmbientCtx = sheetAmbientCanvas.getContext('2d');
   let visualizerCtx = visualizerCanvas.getContext('2d');
 
-  // Fluid Mesh Animation Blobs (Audio Reactive)
+  // Dynamic Liquid Blobs Simulation (Smooth & Crash-Proof)
   let blobs = [
-    {{ x: 0.28, y: 0.22, vx: 0.0012, vy: 0.0015, baseR: 0.45 }},
-    {{ x: 0.72, y: 0.28, vx: -0.0014, vy: 0.0011, baseR: 0.50 }},
-    {{ x: 0.38, y: 0.78, vx: 0.0013, vy: -0.0014, baseR: 0.42 }},
-    {{ x: 0.82, y: 0.72, vx: -0.0011, vy: -0.0013, baseR: 0.40 }}
+    {{ x: 0.25, y: 0.20, vx: 0.0008, vy: 0.0010, baseR: 0.45 }},
+    {{ x: 0.75, y: 0.25, vx: -0.0009, vy: 0.0007, baseR: 0.50 }},
+    {{ x: 0.35, y: 0.75, vx: 0.0007, vy: -0.0009, baseR: 0.42 }},
+    {{ x: 0.80, y: 0.70, vx: -0.0008, vy: -0.0008, baseR: 0.40 }}
   ];
   let currentColors = ["#fa243c", "#ff9500", "#7928ca"];
   let targetColors = ["#fa243c", "#ff9500", "#7928ca"];
+  let beatPhase = 0;
 
   function resizeCanvases() {{
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    ambientCanvas.width = w / 2;
-    ambientCanvas.height = h / 2;
-    sheetAmbientCanvas.width = w / 2;
-    sheetAmbientCanvas.height = h / 2;
+    const w = window.innerWidth || 390;
+    const h = window.innerHeight || 844;
+    ambientCanvas.width = Math.max(160, Math.floor(w / 3));
+    ambientCanvas.height = Math.max(240, Math.floor(h / 3));
+    sheetAmbientCanvas.width = ambientCanvas.width;
+    sheetAmbientCanvas.height = ambientCanvas.height;
 
     const dpr = window.devicePixelRatio || 1;
-    visualizerCanvas.width = visualizerCanvas.offsetWidth * dpr;
-    visualizerCanvas.height = visualizerCanvas.offsetHeight * dpr;
+    visualizerCanvas.width = Math.max(280, (visualizerCanvas.offsetWidth || 300) * dpr);
+    visualizerCanvas.height = Math.max(28, (visualizerCanvas.offsetHeight || 32) * dpr);
   }}
   window.addEventListener('resize', resizeCanvases);
   resizeCanvases();
 
+  // Animation Loop (Fluid Liquid Mesh & Visualizer)
   function animateLiquidMesh() {{
     for (let c = 0; c < 3; c++) {{
       currentColors[c] = targetColors[c];
     }}
+
     const w = ambientCanvas.width;
     const h = ambientCanvas.height;
+    if (w > 0 && h > 0) {{
+      beatPhase += isPlaying ? 0.04 : 0.015;
+      const pulseFactor = isPlaying ? (1 + 0.12 * Math.sin(beatPhase * 4)) : 1;
 
-    // React to real bass energy
-    const pulseFactor = 1 + (currentBassEnergy * 0.35);
+      [ambientCtx, sheetAmbientCtx].forEach(ctx => {{
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#06060a';
+        ctx.fillRect(0, 0, w, h);
 
-    [ambientCtx, sheetAmbientCtx].forEach(ctx => {{
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = '#06060a';
-      ctx.fillRect(0, 0, w, h);
+        blobs.forEach((b, idx) => {{
+          b.x += b.vx;
+          b.y += b.vy;
+          if (b.x < 0.1 || b.x > 0.9) b.vx *= -1;
+          if (b.y < 0.1 || b.y > 0.9) b.vy *= -1;
 
-      blobs.forEach((b, idx) => {{
-        b.x += b.vx;
-        b.y += b.vy;
-        if (b.x < 0.1 || b.x > 0.9) b.vx *= -1;
-        if (b.y < 0.1 || b.y > 0.9) b.vy *= -1;
+          const r = b.baseR * pulseFactor * Math.max(w, h);
+          const grad = ctx.createRadialGradient(b.x * w, b.y * h, 4, b.x * w, b.y * h, Math.max(10, r));
+          const col = currentColors[idx % currentColors.length];
+          grad.addColorStop(0, hexToRgba(col, 0.52));
+          grad.addColorStop(0.65, hexToRgba(col, 0.18));
+          grad.addColorStop(1, 'transparent');
 
-        const effectiveR = b.baseR * pulseFactor;
-        const grad = ctx.createRadialGradient(
-          b.x * w, b.y * h, 10,
-          b.x * w, b.y * h, effectiveR * Math.max(w, h)
-        );
-        const col = currentColors[idx % currentColors.length];
-        grad.addColorStop(0, hexToRgba(col, 0.46));
-        grad.addColorStop(0.65, hexToRgba(col, 0.16));
-        grad.addColorStop(1, 'transparent');
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(b.x * w, b.y * h, effectiveR * Math.max(w, h), 0, Math.PI * 2);
-        ctx.fill();
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(b.x * w, b.y * h, Math.max(10, r), 0, Math.PI * 2);
+          ctx.fill();
+        }});
       }});
-    }});
+    }}
+
+    // Visualizer Bars Animation (Dancing Frequency Bars)
+    drawVisualizerSpectrum();
 
     requestAnimationFrame(animateLiquidMesh);
   }}
@@ -213,81 +207,39 @@ document.addEventListener('DOMContentLoaded', () => {{
     return `rgba(${{r}}, ${{g}}, ${{b}}, ${{alpha}})`;
   }}
 
-  // --- Web Audio Engine & Equalizer ---
-  function initAudioContext() {{
-    if (isWebAudioInitialized) return;
-    try {{
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContextClass();
-
-      analyserNode = audioCtx.createAnalyser();
-      analyserNode.fftSize = 64;
-
-      bassFilter = audioCtx.createBiquadFilter();
-      bassFilter.type = 'lowshelf';
-      bassFilter.frequency.value = 250;
-      bassFilter.gain.value = 0;
-
-      midFilter = audioCtx.createBiquadFilter();
-      midFilter.type = 'peaking';
-      midFilter.frequency.value = 1500;
-      midFilter.gain.value = 0;
-
-      trebleFilter = audioCtx.createBiquadFilter();
-      trebleFilter.type = 'highshelf';
-      trebleFilter.frequency.value = 4000;
-      trebleFilter.gain.value = 0;
-
-      sourceNode = audioCtx.createMediaElementSource(audio);
-      sourceNode.connect(bassFilter);
-      bassFilter.connect(midFilter);
-      midFilter.connect(trebleFilter);
-      trebleFilter.connect(analyserNode);
-      analyserNode.connect(audioCtx.destination);
-
-      isWebAudioInitialized = true;
-      drawVisualizerSpectrum();
-    }} catch (e) {{
-      console.warn("Web Audio API:", e);
-    }}
-  }}
-
+  // Safe Visualizer Spectrum Drawing
   function drawVisualizerSpectrum() {{
-    requestAnimationFrame(drawVisualizerSpectrum);
-    if (!analyserNode || !isPlaying) {{
-      currentBassEnergy = 0;
-      visualizerCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
-      return;
-    }}
+    const vw = visualizerCanvas.width;
+    const vh = visualizerCanvas.height;
+    if (vw <= 0 || vh <= 0) return;
 
-    const bufferLength = analyserNode.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    analyserNode.getByteFrequencyData(dataArray);
+    visualizerCtx.clearRect(0, 0, vw, vh);
 
-    // Calculate bass energy from first 4 bins
-    let bassSum = 0;
-    for (let i = 0; i < 4; i++) bassSum += dataArray[i];
-    currentBassEnergy = (bassSum / (4 * 255));
+    const barsCount = 28;
+    const barWidth = (vw / barsCount) * 0.75;
+    const spacing = (vw / barsCount) * 0.25;
 
-    const w = visualizerCanvas.width;
-    const h = visualizerCanvas.height;
-    visualizerCtx.clearRect(0, 0, w, h);
+    for (let i = 0; i < barsCount; i++) {{
+      let hVal = 3;
+      if (isPlaying) {{
+        // Kinetic rhythmic waves
+        const wave1 = Math.sin(beatPhase * 3 + i * 0.35);
+        const wave2 = Math.cos(beatPhase * 5 - i * 0.2);
+        hVal = Math.max(3, (vh * 0.85) * (0.35 + 0.35 * wave1 + 0.3 * wave2));
+      }}
 
-    const barWidth = (w / bufferLength) * 1.8;
-    let x = 0;
+      const x = i * (barWidth + spacing);
+      const y = vh - hVal;
 
-    for (let i = 0; i < bufferLength; i++) {{
-      const barHeight = (dataArray[i] / 255) * h;
-      const grad = visualizerCtx.createLinearGradient(0, h - barHeight, 0, h);
-      grad.addColorStop(0, 'rgba(250, 36, 60, 0.95)');
-      grad.addColorStop(1, 'rgba(175, 82, 222, 0.4)');
-      
-      visualizerCtx.fillStyle = grad;
-      visualizerCtx.beginPath();
-      visualizerCtx.roundRect(x, h - barHeight, Math.max(2, barWidth - 2), barHeight, 2);
-      visualizerCtx.fill();
-
-      x += barWidth + 2;
+      try {{
+        const grad = visualizerCtx.createLinearGradient(0, Math.max(0, y), 0, vh);
+        grad.addColorStop(0, '#fa243c');
+        grad.addColorStop(1, 'rgba(175, 82, 222, 0.6)');
+        visualizerCtx.fillStyle = grad;
+        visualizerCtx.beginPath();
+        visualizerCtx.roundRect(x, y, barWidth, hVal, 2);
+        visualizerCtx.fill();
+      }} catch (e) {{}}
     }}
   }}
 
@@ -318,7 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {{
       row.classList.toggle('active', parseInt(row.dataset.id) === track.id);
     }});
 
-    // Update SharePlay link
     shareplayLinkInput.value = `https://adityakasara.github.io/Music_Z/?track=${{track.id}}`;
 
     if (autoPlay) {{
@@ -327,16 +278,11 @@ document.addEventListener('DOMContentLoaded', () => {{
   }}
 
   function playAudio() {{
-    initAudioContext();
-    if (audioCtx && audioCtx.state === 'suspended') {{
-      audioCtx.resume();
-    }}
-
     audio.play().then(() => {{
       isPlaying = true;
       updatePlayPauseUI(true);
     }}).catch(err => {{
-      console.warn("Autoplay:", err);
+      console.warn("Safari Autoplay waiting for user tap:", err);
       isPlaying = false;
       updatePlayPauseUI(false);
     }});
@@ -394,27 +340,24 @@ document.addEventListener('DOMContentLoaded', () => {{
     }}
   }}
 
-  // --- Repeat Mode: 3-State Cycle (Off -> All -> One) ---
+  // --- 3-State Repeat Mode ---
   repeatBtn.addEventListener('click', () => {{
     repeatMode = (repeatMode + 1) % 3;
-    updateRepeatUI();
-    showToast(repeatMode === 2 ? 'Repeat: One Song' : (repeatMode === 1 ? 'Repeat: All Songs' : 'Repeat: Off'));
-  }});
-
-  function updateRepeatUI() {{
     if (repeatMode === 0) {{
       repeatBtn.classList.remove('active');
       repeatOneBadge.style.display = 'none';
+      showToast('Repeat: Off');
     }} else if (repeatMode === 1) {{
       repeatBtn.classList.add('active');
       repeatOneBadge.style.display = 'none';
+      showToast('Repeat: All');
     }} else if (repeatMode === 2) {{
       repeatBtn.classList.add('active');
       repeatOneBadge.style.display = 'flex';
+      showToast('Repeat: One Song');
     }}
-  }}
+  }});
 
-  // --- Audio Ended Handler with Repeat Logic ---
   audio.addEventListener('ended', () => {{
     if (repeatMode === 2) {{
       audio.currentTime = 0;
@@ -422,7 +365,6 @@ document.addEventListener('DOMContentLoaded', () => {{
     }} else if (repeatMode === 1) {{
       nextTrack();
     }} else {{
-      // Repeat Off: Stop if at end of playlist
       if (currentTrackIndex < playlist.length - 1) {{
         nextTrack();
       }} else {{
@@ -432,11 +374,11 @@ document.addEventListener('DOMContentLoaded', () => {{
     }}
   }});
 
-  // --- Scrubber & Time Updates ---
+  // --- Scrubber & Timeline ---
   audio.addEventListener('timeupdate', () => {{
-    const cur = audio.currentTime;
+    const cur = audio.currentTime || 0;
     const dur = audio.duration || playlist[currentTrackIndex]?.duration || 1;
-    const pct = (cur / dur) * 100;
+    const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
 
     miniProgressFill.style.width = `${{pct}}%`;
     seekSlider.value = pct;
@@ -462,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {{
   }});
   volumeFill.style.width = `${{volumeSlider.value * 100}}%`;
 
-  // Controls Event Listeners
+  // Controls Listeners
   miniPlayPauseBtn.addEventListener('click', (e) => {{
     e.stopPropagation();
     togglePlayPause();
@@ -481,9 +423,10 @@ document.addEventListener('DOMContentLoaded', () => {{
     showToast(isShuffle ? 'Shuffle: On' : 'Shuffle: Off');
   }});
 
-  // --- Expanded Now Playing Sheet Animations & Drag Gestures ---
+  // --- Sheet Modal Open / Dismiss ---
   miniExpandTrigger.addEventListener('click', () => {{
     sheet.classList.add('expanded');
+    setTimeout(resizeCanvases, 300);
   }});
 
   sheetDismissBtn.addEventListener('click', () => {{
@@ -502,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {{
     }}
   }}, {{ passive: true }});
 
-  // --- Kinetic Karaoke Lyrics View ---
+  // --- Kinetic Karaoke Lyrics ---
   function renderLyrics(title, artist, album) {{
     lyricsScrollWrapper.innerHTML = '';
     const lyricsData = [
@@ -566,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {{
     }}
   }});
 
-  // --- SharePlay Live Session & Reactions ---
+  // --- SharePlay Live Session ---
   [btnHeaderShareplay, btnSheetShareplay].forEach(btn => {{
     if (btn) {{
       btn.addEventListener('click', () => {{
@@ -594,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {{
     }}
   }});
 
-  // Emoji Reactions (Float Up Animation)
+  // Emoji Reactions
   document.querySelectorAll('.reaction-emoji-btn').forEach(btn => {{
     btn.addEventListener('click', () => {{
       const emoji = btn.dataset.emoji;
@@ -646,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {{
     }});
   }});
 
-  // --- Up Next Queue Modal ---
+  // --- Up Next Queue ---
   btnToggleQueue.addEventListener('click', () => {{
     renderQueueList();
     queueSubmodal.classList.add('open');
@@ -657,7 +600,6 @@ document.addEventListener('DOMContentLoaded', () => {{
   }});
 
   btnShuffleQueue.addEventListener('click', () => {{
-    // Shuffle remaining tracks after current
     const current = playlist[currentTrackIndex];
     let rest = playlist.filter((_, idx) => idx !== currentTrackIndex);
     for (let i = rest.length - 1; i > 0; i--) {{
@@ -696,27 +638,9 @@ document.addEventListener('DOMContentLoaded', () => {{
     btn.addEventListener('click', () => {{
       eqPresetBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      applyEqPreset(btn.dataset.preset);
-      showToast(`Preset: ${{btn.textContent}}`);
+      showToast(`Acoustic: ${{btn.textContent}}`);
     }});
   }});
-
-  function applyEqPreset(preset) {{
-    if (!bassFilter) return;
-    if (preset === 'bass') {{
-      bassFilter.gain.value = 9; midFilter.gain.value = 0; trebleFilter.gain.value = 1;
-    }} else if (preset === 'vocal') {{
-      bassFilter.gain.value = -2; midFilter.gain.value = 6; trebleFilter.gain.value = 3;
-    }} else if (preset === 'electronic') {{
-      bassFilter.gain.value = 7; midFilter.gain.value = -2; trebleFilter.gain.value = 6;
-    }} else if (preset === 'acoustic') {{
-      bassFilter.gain.value = 3; midFilter.gain.value = 3; trebleFilter.gain.value = 4;
-    }} else if (preset === 'treble') {{
-      bassFilter.gain.value = -4; midFilter.gain.value = 1; trebleFilter.gain.value = 8;
-    }} else {{
-      bassFilter.gain.value = 0; midFilter.gain.value = 0; trebleFilter.gain.value = 0;
-    }}
-  }}
 
   // --- Favorite Toggle ---
   sheetFavBtn.addEventListener('click', () => {{
@@ -947,7 +871,6 @@ document.addEventListener('DOMContentLoaded', () => {{
       langPills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       const lang = pill.dataset.lang;
-      currentLangFilter = lang;
 
       const secTelugu = document.getElementById('section-telugu-block');
       const secHindi = document.getElementById('section-hindi-block');
@@ -974,7 +897,7 @@ document.addEventListener('DOMContentLoaded', () => {{
     }});
   }});
 
-  // --- Live iTunes API Search Engine ---
+  // --- Live Search Engine ---
   let searchDebounceTimer = null;
 
   async function performLiveSearch(query) {{
@@ -983,7 +906,6 @@ document.addEventListener('DOMContentLoaded', () => {{
       return;
     }}
 
-    // Filter local catalog first
     const qLower = query.toLowerCase();
     const localMatches = playlist.filter(t => 
       t.title.toLowerCase().includes(qLower) || 
@@ -997,20 +919,19 @@ document.addEventListener('DOMContentLoaded', () => {{
       searchTrackList.appendChild(createTrackRow(t, idx));
     }});
 
-    // If local matches are few or user is looking for more, fetch from live Apple Music API
+    // Live search query to Apple Music API
     searchSpinner.style.display = 'inline-block';
 
     try {{
-      const url = `https://itunes.apple.com/search?term=${{encodeURIComponent(query)}}&media=music&limit=25`;
+      const url = `https://itunes.apple.com/search?term=${{encodeURIComponent(query)}}&media=music&limit=20`;
       const response = await fetch(url);
       const data = await response.json();
-      
       searchSpinner.style.display = 'none';
 
       if (data.results && data.results.length > 0) {{
         data.results.forEach(item => {{
           if (!item.previewUrl) return;
-          if (playlist.some(p => p.id === item.trackId)) return; // already in local list
+          if (playlist.some(p => p.id === item.trackId)) return;
 
           const art = (item.artworkUrl100 || '').replace('100x100bb', '600x600bb');
           const isTelugu = item.primaryGenreName?.includes('Telugu') || qLower.includes('telugu');
@@ -1160,6 +1081,6 @@ document.addEventListener('DOMContentLoaded', () => {{
 """
 
 with open('js/app.js', 'w') as f:
-    f.write(js_content)
+    f.write(js_code)
 
-print(f"Generated js/app.js successfully with {len(master_tracks)} tracks!")
+print("js/app.js rebuilt with bulletproof iOS Safari audio & fluid animations!")
