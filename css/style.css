@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Apple Music Design System — iOS & Web (Music Z)
+   Apple Music Design System — iOS & Web (Music Z Pro)
    ========================================================================== */
 
 :root {
@@ -8,7 +8,7 @@
   --bg-card: rgba(255, 255, 255, 0.08);
   --bg-card-hover: rgba(255, 255, 255, 0.14);
   --bg-glass: rgba(20, 20, 26, 0.8);
-  --bg-glass-heavy: rgba(14, 14, 18, 0.92);
+  --bg-glass-heavy: rgba(14, 14, 18, 0.94);
   --border-glass: rgba(255, 255, 255, 0.12);
   --border-light: rgba(255, 255, 255, 0.06);
 
@@ -17,6 +17,7 @@
   --accent-purple: #af52de;
   --accent-blue: #0a84ff;
   --accent-orange: #ff9500;
+  --accent-green: #34c759;
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.65);
   --text-tertiary: rgba(255, 255, 255, 0.38);
@@ -95,7 +96,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Viewport Structure (iPhone Frame & Desktop Responsive)
+   Viewport Structure
    ========================================================================== */
 .app-viewport {
   position: relative;
@@ -126,7 +127,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Apple Music Brand Header & Logo Lockup
+   Header & Brand Lockup
    ========================================================================== */
 .app-header {
   height: 56px;
@@ -193,29 +194,6 @@ html, body {
   gap: 10px;
 }
 
-.live-pill-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  color: #fff;
-  background: rgba(250, 36, 60, 0.22);
-  border: 1px solid rgba(250, 36, 60, 0.5);
-  padding: 3px 8px;
-  border-radius: 12px;
-}
-
-.live-dot-mini {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #34c759;
-  box-shadow: 0 0 6px #34c759;
-  animation: pulseDot 1.4s infinite;
-}
-
 .header-icon-btn {
   width: 36px;
   height: 36px;
@@ -233,6 +211,12 @@ html, body {
 .header-icon-btn:active {
   transform: scale(0.92);
   background: var(--bg-card-hover);
+}
+
+.shareplay-pulse-btn {
+  color: var(--accent-green);
+  border-color: rgba(52, 199, 89, 0.35);
+  background: rgba(52, 199, 89, 0.12);
 }
 
 .user-avatar-btn {
@@ -834,7 +818,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Library Rows & Add Button
+   Library Rows
    ========================================================================== */
 .add-music-btn {
   display: inline-flex;
@@ -901,7 +885,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Search Input (iOS Style) & Live Search
+   Search Input (iOS Style)
    ========================================================================== */
 .search-bar-wrap {
   margin-bottom: 12px;
@@ -1285,7 +1269,7 @@ html, body {
   aspect-ratio: 1/1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(250, 36, 60, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(250, 36, 60, 0.28);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   background: #111;
 }
@@ -1354,7 +1338,7 @@ html, body {
   transform: scale(1.03) translateX(6px);
 }
 
-/* Visualizer Frequency Strip */
+/* Frequency Spectrum Strip */
 .visualizer-strip {
   width: 100%;
   height: 28px;
@@ -1477,7 +1461,7 @@ html, body {
   margin-top: -2px;
 }
 
-/* Playback Controls */
+/* Playback Controls & 3-State Repeat */
 .sheet-playback-controls {
   display: flex;
   align-items: center;
@@ -1497,6 +1481,30 @@ html, body {
 
 .sheet-secondary-ctrl.active {
   color: var(--accent-apple-pink);
+}
+
+.repeat-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.repeat-one-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: var(--accent-apple-pink);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 900;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .sheet-main-step-ctrl {
@@ -1585,7 +1593,9 @@ html, body {
   border-color: #fff;
 }
 
-/* Submodals */
+/* ==========================================================================
+   Submodals (Queue, SharePlay, AirPlay, EQ)
+   ========================================================================== */
 .sheet-submodal {
   position: absolute;
   top: 0;
@@ -1627,6 +1637,23 @@ html, body {
   font-weight: 700;
 }
 
+.submodal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.submodal-pill-action {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
 .submodal-close-btn {
   background: none;
   border: none;
@@ -1634,6 +1661,15 @@ html, body {
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.submodal-subheading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
 }
 
 .queue-list {
@@ -1644,7 +1680,260 @@ html, body {
   gap: 4px;
 }
 
-/* Equalizer */
+/* ==========================================================================
+   SharePlay Modal Styling
+   ========================================================================== */
+.shareplay-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.shareplay-card {
+  background: linear-gradient(135deg, rgba(52, 199, 89, 0.15) 0%, rgba(10, 132, 255, 0.15) 100%);
+  border: 1px solid rgba(52, 199, 89, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.shareplay-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin-bottom: 6px;
+}
+
+.shareplay-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.shareplay-link-box {
+  display: flex;
+  gap: 8px;
+}
+
+.shareplay-link-box input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  outline: none;
+}
+
+.shareplay-copy-btn {
+  background: var(--accent-green);
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.shareplay-copy-btn:active {
+  transform: scale(0.95);
+}
+
+.listeners-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.listener-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.listener-row:last-child {
+  border-bottom: none;
+}
+
+.listener-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-right: 12px;
+  color: #fff;
+}
+
+.avatar-host { background: linear-gradient(135deg, #fa243c, #ff9500); }
+.avatar-p2 { background: linear-gradient(135deg, #af52de, #007aff); }
+.avatar-p3 { background: linear-gradient(135deg, #34c759, #00c7be); }
+
+.listener-info {
+  flex: 1;
+}
+
+.listener-name {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+}
+
+.listener-device {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.listener-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(250, 36, 60, 0.2);
+  color: var(--accent-apple-pink);
+  border: 1px solid rgba(250, 36, 60, 0.4);
+}
+
+.reaction-buttons-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.reaction-emoji-btn {
+  flex: 1;
+  height: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.reaction-emoji-btn:active {
+  transform: scale(1.25);
+  background: var(--bg-card-hover);
+}
+
+/* Floating Emoji Animations */
+.emoji-reaction-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.floating-reaction-emoji {
+  position: absolute;
+  bottom: 80px;
+  font-size: 34px;
+  will-change: transform, opacity;
+  animation: floatUpEmoji 2.2s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes floatUpEmoji {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.6) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-280px) scale(1.3) rotate(var(--rot, 15deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-560px) scale(1.1) rotate(var(--rot-end, -20deg));
+  }
+}
+
+/* ==========================================================================
+   AirPlay Devices Modal
+   ========================================================================== */
+.airplay-devices-list {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+  overflow: hidden;
+}
+
+.airplay-row {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.airplay-row:last-child {
+  border-bottom: none;
+}
+
+.airplay-row:active {
+  background: var(--bg-card-hover);
+}
+
+.airplay-row.active {
+  background: rgba(10, 132, 255, 0.15);
+}
+
+.airplay-icon {
+  font-size: 24px;
+  margin-right: 14px;
+}
+
+.airplay-device-info {
+  flex: 1;
+}
+
+.airplay-device-name {
+  font-size: 16px;
+  font-weight: 600;
+  display: block;
+}
+
+.airplay-row.active .airplay-device-name {
+  color: var(--accent-blue);
+}
+
+.airplay-device-type {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.airplay-check {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent-blue);
+}
+
+/* ==========================================================================
+   Equalizer Styling
+   ========================================================================== */
 .eq-section {
   display: flex;
   flex-direction: column;
@@ -1748,4 +2037,33 @@ html, body {
   background: #fff;
   color: #000;
   font-weight: 700;
+}
+
+/* ==========================================================================
+   iOS Toast Notification
+   ========================================================================== */
+.ios-toast {
+  position: fixed;
+  top: calc(var(--safe-top) + 20px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: rgba(30, 30, 38, 0.95);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.35s var(--spring-easing);
+}
+
+.ios-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }
