@@ -11,44 +11,52 @@
   <meta name="apple-mobile-web-app-title" content="Music Z">
   <meta name="theme-color" content="#0d0d12">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Music Z — An Apple Music experience designed for iPhone and web with dynamic liquid backgrounds, time-synced lyrics, and spatial audio.">
+  <meta name="description" content="Music Z — Apple Music experience with live Telugu & Hindi hits, dynamic liquid backgrounds, and spatial audio.">
 
   <!-- Apple Touch Icon & Favicon -->
-  <link rel="apple-touch-icon" href="assets/covers/neon_horizon.jpg">
-  <link rel="icon" type="image/jpeg" href="assets/covers/neon_horizon.jpg">
+  <link rel="apple-touch-icon" href="assets/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 
-  <!-- Google Font: Inter & SF Pro display styling -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=SF+Pro+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="ios-app">
-  <!-- Dynamic Ambient Mesh Canvas (Behind everything) -->
+  <!-- Dynamic Ambient Mesh Canvas -->
   <canvas id="ambient-canvas" class="ambient-canvas"></canvas>
   <div class="ambient-overlay"></div>
 
-  <!-- App Wrapper (iPhone Safe Area Aware) -->
+  <!-- App Viewport (iPhone Safe Area Aware) -->
   <div class="app-viewport" id="app-viewport">
     
-    <!-- iOS Status Bar Spacer (for PWA / Standalone mode) -->
+    <!-- iOS Status Bar Spacer -->
     <div class="ios-status-bar-spacer"></div>
 
-    <!-- Main Navigation Header -->
+    <!-- Main Navigation Header with Sleek Apple Music Logo -->
     <header class="app-header" id="app-header">
       <div class="header-left">
-        <span class="apple-logo-badge">
-          <svg viewBox="0 0 170 170" width="18" height="18" fill="currentColor">
-            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.7-11.64-13.99-5.99-9.13-10.83-19.99-14.55-32.58-3.71-12.6-5.57-24.44-5.57-35.53 0-14.79 3.72-27.12 11.16-37 7.44-9.88 17.06-14.93 28.86-15.15 4.57 0 9.79 1.25 15.67 3.75 5.88 2.5 9.79 3.8 11.73 3.91 1.52 0 5.66-1.41 12.41-4.24 6.75-2.83 12.3-4.04 16.65-3.63 12.83 1.09 23.06 6.31 30.68 15.66-11.31 6.85-16.85 16.52-16.63 29.02.22 9.78 3.92 18.04 11.1 24.78 7.18 6.74 15.88 10.43 26.11 11.1-2.18 6.31-4.89 12.5-8.15 18.57zM119.22 33.15c0-7.18 2.61-13.81 7.83-19.89 5.22-6.09 11.85-9.89 19.89-11.41.65 1.09.98 2.18.98 3.26 0 7.18-2.72 14.13-8.15 20.87-5.44 6.74-12.18 10.65-20.22 11.74-.22-1.3-.33-2.83-.33-4.57z"/>
-          </svg>
-          <span>Music</span>
-        </span>
+        <div class="app-brand-lockup">
+          <div class="app-logo-squircle">
+            <img src="assets/logo.svg" alt="Music Z" width="32" height="32" class="brand-logo-img">
+          </div>
+          <div class="brand-text-wrap">
+            <span class="brand-title">Music</span>
+            <span class="brand-badge-z">Z</span>
+          </div>
+        </div>
       </div>
       <div class="header-right">
+        <!-- Live Live Stream Indicator -->
+        <span class="live-pill-badge" id="live-catalog-badge">
+          <span class="live-dot-mini"></span> LIVE
+        </span>
+
         <!-- Audio Input / Custom Music Upload Button -->
         <label for="local-music-input" class="header-icon-btn" title="Add your own music" id="btn-upload-label">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
           </svg>
         </label>
@@ -56,7 +64,7 @@
 
         <!-- Spatial / Equalizer Dialog Toggle -->
         <button class="header-icon-btn" id="btn-eq-toggle" aria-label="Equalizer & Sound Effects">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="4" y1="21" x2="4" y2="14"></line>
             <line x1="4" y1="10" x2="4" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="12"></line>
@@ -85,75 +93,39 @@
           <span class="live-status-pill" id="spatial-indicator">Spatial Audio</span>
         </div>
 
+        <!-- Language / Category Filter Pills -->
+        <div class="lang-pills-row" id="lang-pills-row">
+          <button class="lang-pill active" data-lang="all">🔥 All Hits</button>
+          <button class="lang-pill" data-lang="telugu">🇮🇳 Telugu Songs</button>
+          <button class="lang-pill" data-lang="hindi">✨ Hindi / Bollywood</button>
+          <button class="lang-pill" data-lang="lofi">🎧 Chill & Lofi</button>
+        </div>
+
         <!-- Featured Editorial Hero Carousel -->
         <div class="hero-carousel-container">
           <div class="hero-carousel" id="hero-carousel">
-            <!-- Hero Card 1 -->
-            <div class="hero-card" data-track-id="0">
-              <div class="hero-card-art-wrap">
-                <img src="assets/covers/neon_horizon.jpg" alt="Neon Horizon" class="hero-art-img">
-                <div class="hero-glass-badge">FEATURED ALBUM</div>
-              </div>
-              <div class="hero-meta">
-                <span class="hero-subtitle">NEW RELEASE • SYNTHWAVE DREAMS</span>
-                <h2 class="hero-title">Neon Horizon</h2>
-                <p class="hero-desc">Cyberpunk twilight beats rendered in spatial clarity.</p>
-                <button class="hero-play-pill-btn" data-play-track="0">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                  <span>Play</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Hero Card 2 -->
-            <div class="hero-card" data-track-id="1">
-              <div class="hero-card-art-wrap">
-                <img src="assets/covers/midnight_chill.jpg" alt="Midnight Session" class="hero-art-img">
-                <div class="hero-glass-badge">COZY LO-FI</div>
-              </div>
-              <div class="hero-meta">
-                <span class="hero-subtitle">EDITOR'S CHOICE • TOKYO RAIN</span>
-                <h2 class="hero-title">Midnight Session</h2>
-                <p class="hero-desc">Warm Rhodes keys and dusty vinyl crackle for late night focus.</p>
-                <button class="hero-play-pill-btn" data-play-track="1">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                  <span>Play</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Hero Card 3 -->
-            <div class="hero-card" data-track-id="2">
-              <div class="hero-card-art-wrap">
-                <img src="assets/covers/celestial_mirage.jpg" alt="Celestial Mirage" class="hero-art-img">
-                <div class="hero-glass-badge">ATMOSPHERIC</div>
-              </div>
-              <div class="hero-meta">
-                <span class="hero-subtitle">SPATIAL CHILL • COSMIC DRIFT</span>
-                <h2 class="hero-title">Celestial Mirage</h2>
-                <p class="hero-desc">Iridescent liquid soundscapes tuned for deep relaxation.</p>
-                <button class="hero-play-pill-btn" data-play-track="2">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                  <span>Play</span>
-                </button>
-              </div>
-            </div>
+            <!-- Dynamically populated or default cards -->
           </div>
         </div>
 
-        <!-- Section: Top Picks (Horizontal Scroll on Mobile) -->
-        <div class="section-container">
+        <!-- Section: Telugu Chartbusters -->
+        <div class="section-container" id="section-telugu-block">
           <div class="section-header-row">
-            <h3 class="section-title">Top Picks</h3>
-            <button class="section-action-btn" id="btn-see-all-picks">See All</button>
+            <h3 class="section-title">Telugu Chartbusters</h3>
+            <button class="section-action-btn" data-lang-filter="telugu">See All</button>
           </div>
-          <div class="horizontal-scroll-row" id="top-picks-row">
+          <div class="horizontal-scroll-row" id="telugu-row">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Section: Hindi / Bollywood Top Hits -->
+        <div class="section-container" id="section-hindi-block">
+          <div class="section-header-row">
+            <h3 class="section-title">Hindi / Bollywood Hits</h3>
+            <button class="section-action-btn" data-lang-filter="hindi">See All</button>
+          </div>
+          <div class="horizontal-scroll-row" id="hindi-row">
             <!-- Populated via JS -->
           </div>
         </div>
@@ -177,23 +149,23 @@
         </div>
 
         <div class="browse-categories-grid">
+          <div class="browse-cat-card cat-telugu" data-filter="telugu">
+            <span>Telugu Cinema Hits</span>
+          </div>
+          <div class="browse-cat-card cat-hindi" data-filter="hindi">
+            <span>Bollywood Romance</span>
+          </div>
           <div class="browse-cat-card cat-spatial" data-filter="spatial">
             <span>Spatial Audio</span>
           </div>
           <div class="browse-cat-card cat-lofi" data-filter="lofi">
             <span>Chill & Lo-Fi</span>
           </div>
-          <div class="browse-cat-card cat-electronic" data-filter="synthwave">
-            <span>Electronic & Synth</span>
-          </div>
-          <div class="browse-cat-card cat-focus" data-filter="ambient">
-            <span>Focus & Sleep</span>
-          </div>
         </div>
 
         <div class="section-container mt-6">
           <div class="section-header-row">
-            <h3 class="section-title">City Charts & Global Top</h3>
+            <h3 class="section-title">Trending Across India</h3>
           </div>
           <div class="track-list" id="browse-track-list">
             <!-- Populated via JS -->
@@ -209,10 +181,10 @@
 
         <div class="radio-live-banner">
           <div class="radio-live-badge">
-            <span class="live-dot"></span> LIVE BROADCAST
+            <span class="live-dot"></span> LIVE 24/7
           </div>
-          <h2 class="radio-station-title">Apple Music 1</h2>
-          <p class="radio-station-desc">The new music that matters today, broadcasted live globally.</p>
+          <h2 class="radio-station-title">Apple Music 1 India</h2>
+          <p class="radio-station-desc">Tollywood & Bollywood chartbusters broadcasted live with zero ads.</p>
           <button class="radio-play-btn" id="btn-play-radio-1">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -223,7 +195,7 @@
 
         <div class="section-container">
           <div class="section-header-row">
-            <h3 class="section-title">Curated Radio Stations</h3>
+            <h3 class="section-title">Radio Stations</h3>
           </div>
           <div class="horizontal-scroll-row" id="radio-stations-row">
             <!-- Stations populated via JS -->
@@ -254,7 +226,25 @@
                 <circle cx="18" cy="16" r="3"></circle>
               </svg>
             </span>
-            <span class="lib-row-text">Songs</span>
+            <span class="lib-row-text">All Songs</span>
+            <span class="lib-row-chevron">›</span>
+          </div>
+          <div class="library-row-item" data-lib-filter="telugu">
+            <span class="lib-row-icon icon-orange">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </span>
+            <span class="lib-row-text">Telugu Songs</span>
+            <span class="lib-row-chevron">›</span>
+          </div>
+          <div class="library-row-item" data-lib-filter="hindi">
+            <span class="lib-row-icon icon-pink">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </span>
+            <span class="lib-row-text">Hindi Songs</span>
             <span class="lib-row-chevron">›</span>
           </div>
           <div class="library-row-item" data-lib-filter="favorite">
@@ -266,20 +256,11 @@
             <span class="lib-row-text">Favorites</span>
             <span class="lib-row-chevron">›</span>
           </div>
-          <div class="library-row-item" data-lib-filter="uploaded">
-            <span class="lib-row-icon icon-blue">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
-              </svg>
-            </span>
-            <span class="lib-row-text">Imported from iPhone</span>
-            <span class="lib-row-chevron">›</span>
-          </div>
         </div>
 
         <div class="section-container mt-6">
           <div class="section-header-row">
-            <h3 class="section-title">Recently Added</h3>
+            <h3 class="section-title">Saved Tracks</h3>
           </div>
           <div class="track-list" id="library-track-list">
             <!-- Populated via JS -->
@@ -287,48 +268,56 @@
         </div>
       </section>
 
-      <!-- TAB 5: SEARCH -->
+      <!-- TAB 5: SEARCH (LIVE FETCH FROM APPLE MUSIC / ITUNES) -->
       <section class="tab-page" id="tab-search">
         <div class="page-title-row">
           <h1 class="page-large-title">Search</h1>
         </div>
 
-        <!-- iOS Style Search Bar -->
+        <!-- iOS Style Live Search Bar -->
         <div class="search-bar-wrap">
           <div class="search-input-box">
             <svg class="search-lens-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="search-input" placeholder="Artists, Songs, Lyrics, and More" autocomplete="off" autocapitalize="off">
+            <input type="text" id="search-input" placeholder="Search any Telugu, Hindi song, movie or artist..." autocomplete="off" autocapitalize="off">
+            <span class="search-loading-spinner" id="search-spinner" style="display:none;"></span>
             <button class="search-clear-btn" id="search-clear-btn" style="display:none;">✕</button>
           </div>
         </div>
 
-        <!-- Quick Tags -->
+        <!-- Quick Trending Suggestions -->
         <div class="search-tags-row">
-          <button class="search-tag active" data-tag="all">All</button>
-          <button class="search-tag" data-tag="synthwave">Synthwave</button>
-          <button class="search-tag" data-tag="lofi">Lo-Fi</button>
-          <button class="search-tag" data-tag="ambient">Ambient</button>
-          <button class="search-tag" data-tag="spatial">Spatial</button>
+          <button class="search-tag active" data-query="all">All</button>
+          <button class="search-tag" data-query="Devara Telugu">Devara</button>
+          <button class="search-tag" data-query="Pushpa 2 Telugu">Pushpa 2</button>
+          <button class="search-tag" data-query="Arijit Singh">Arijit Singh</button>
+          <button class="search-tag" data-query="Anirudh Telugu">Anirudh</button>
+          <button class="search-tag" data-query="Sid Sriram Telugu">Sid Sriram</button>
+          <button class="search-tag" data-query="Shreya Ghoshal">Shreya Ghoshal</button>
+          <button class="search-tag" data-query="Animal Bollywood">Animal</button>
         </div>
 
-        <!-- Search Results / Empty State -->
+        <!-- Search Results Count Banner -->
+        <div class="search-meta-banner" id="search-meta-banner">
+          <span>Live Apple Music Catalog</span>
+        </div>
+
+        <!-- Search Results List -->
         <div class="search-results-area" id="search-results-area">
           <div class="track-list" id="search-track-list">
-            <!-- Populated by query -->
+            <!-- Populated by live query -->
           </div>
         </div>
       </section>
 
-      <!-- Bottom Spacer to allow scrolling above floating mini-player & bottom nav -->
+      <!-- Bottom Spacer -->
       <div class="bottom-page-padding"></div>
     </main>
 
-    <!-- FLOATING IPHONE MINI PLAYER (Docked right above the bottom tab bar) -->
+    <!-- FLOATING IPHONE MINI PLAYER -->
     <div class="mini-player" id="mini-player">
-      <!-- Mini Player Top Progress Bar Line -->
       <div class="mini-progress-container">
         <div class="mini-progress-fill" id="mini-progress-fill"></div>
       </div>
@@ -338,13 +327,12 @@
           <img src="assets/covers/neon_horizon.jpg" alt="Now Playing" class="mini-art-img" id="mini-art">
           <div class="mini-meta">
             <div class="mini-title-marquee">
-              <span class="mini-title" id="mini-title">Neon Horizon</span>
+              <span class="mini-title" id="mini-title">Chuttamalle (Devara)</span>
             </div>
-            <span class="mini-artist" id="mini-artist">Synthwave Dreams</span>
+            <span class="mini-artist" id="mini-artist">Anirudh Ravichander</span>
           </div>
         </div>
         <div class="mini-right">
-          <!-- Play / Pause Button -->
           <button class="mini-ctrl-btn" id="mini-play-pause-btn" aria-label="Play or Pause">
             <svg id="mini-play-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -355,7 +343,6 @@
             </svg>
           </button>
           
-          <!-- Skip Next -->
           <button class="mini-ctrl-btn" id="mini-next-btn" aria-label="Next Track">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
               <polygon points="5 4 15 12 5 20 5 4"></polygon>
@@ -411,13 +398,11 @@
     </nav>
   </div>
 
-  <!-- FULL-SCREEN EXPANDED NOW PLAYING SHEET (Iconic Apple Music Modal) -->
+  <!-- FULL-SCREEN EXPANDED NOW PLAYING SHEET -->
   <div class="now-playing-sheet" id="now-playing-sheet">
-    <!-- Liquid Gradient Backdrop Canvas for the Sheet -->
     <canvas id="sheet-ambient-canvas" class="sheet-ambient-canvas"></canvas>
     <div class="sheet-ambient-overlay"></div>
 
-    <!-- Pull Down Dismiss Grabber -->
     <div class="sheet-grabber-zone" id="sheet-grabber-zone">
       <div class="sheet-grabber-bar"></div>
     </div>
@@ -442,9 +427,8 @@
       </button>
     </div>
 
-    <!-- Main Dynamic Body: Artwork Mode vs Time-Synced Lyrics Mode -->
+    <!-- Main Dynamic Body -->
     <div class="sheet-main-display" id="sheet-main-display">
-      
       <!-- VIEW A: Giant Album Artwork Display -->
       <div class="artwork-view-container active" id="sheet-artwork-view">
         <div class="sheet-art-shadow-box" id="sheet-art-box">
@@ -452,7 +436,7 @@
         </div>
       </div>
 
-      <!-- VIEW B: Kinetic Time-Synced Karaoke Lyrics -->
+      <!-- VIEW B: Kinetic Karaoke Lyrics -->
       <div class="lyrics-view-container" id="sheet-lyrics-view">
         <div class="lyrics-scroll-wrapper" id="lyrics-scroll-wrapper">
           <!-- Lyrics lines dynamically populated -->
@@ -460,16 +444,16 @@
       </div>
     </div>
 
-    <!-- Live Audio Frequency Spectrum Canvas -->
+    <!-- Frequency Spectrum Strip -->
     <div class="visualizer-strip">
       <canvas id="audio-visualizer-canvas" height="32"></canvas>
     </div>
 
-    <!-- Track Metadata & Favorite Row -->
+    <!-- Track Metadata & Favorite -->
     <div class="sheet-meta-row">
       <div class="sheet-track-info">
-        <h2 class="sheet-track-title" id="sheet-title">Neon Horizon</h2>
-        <p class="sheet-artist-name" id="sheet-artist">Synthwave Dreams</p>
+        <h2 class="sheet-track-title" id="sheet-title">Chuttamalle (Devara)</h2>
+        <p class="sheet-artist-name" id="sheet-artist">Anirudh Ravichander</p>
       </div>
       <button class="sheet-favorite-btn" id="sheet-fav-btn" aria-label="Favorite Track">
         <svg class="heart-outline" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
@@ -481,7 +465,7 @@
       </button>
     </div>
 
-    <!-- iOS Interactive Scrubber Slider -->
+    <!-- Scrubber Slider -->
     <div class="sheet-scrubber-zone">
       <div class="custom-slider-wrap">
         <input type="range" class="ios-slider" id="sheet-seek-slider" min="0" max="100" value="0" step="0.1">
@@ -493,9 +477,8 @@
       </div>
     </div>
 
-    <!-- Primary Cupertino Playback Controls -->
+    <!-- Playback Controls -->
     <div class="sheet-playback-controls">
-      <!-- Shuffle -->
       <button class="sheet-secondary-ctrl" id="btn-shuffle" aria-label="Shuffle">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="16 3 21 3 21 8"></polyline>
@@ -506,7 +489,6 @@
         </svg>
       </button>
 
-      <!-- Previous Track -->
       <button class="sheet-main-step-ctrl" id="btn-prev" aria-label="Previous Track">
         <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
           <polygon points="19 20 9 12 19 4 19 20"></polygon>
@@ -514,7 +496,6 @@
         </svg>
       </button>
 
-      <!-- Giant Play/Pause Hero Button -->
       <button class="sheet-giant-play-btn" id="btn-main-play-pause" aria-label="Play or Pause">
         <svg id="sheet-play-icon" viewBox="0 0 24 24" width="34" height="34" fill="currentColor">
           <polygon points="6 3 20 12 6 21 6 3"></polygon>
@@ -525,7 +506,6 @@
         </svg>
       </button>
 
-      <!-- Next Track -->
       <button class="sheet-main-step-ctrl" id="btn-next" aria-label="Next Track">
         <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
           <polygon points="5 4 15 12 5 20 5 4"></polygon>
@@ -533,7 +513,6 @@
         </svg>
       </button>
 
-      <!-- Repeat -->
       <button class="sheet-secondary-ctrl" id="btn-repeat" aria-label="Repeat">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="17 1 21 5 17 9"></polyline>
@@ -544,7 +523,7 @@
       </button>
     </div>
 
-    <!-- Volume Slider (iOS Speaker icons) -->
+    <!-- Volume -->
     <div class="sheet-volume-row">
       <svg class="vol-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -560,9 +539,8 @@
       </svg>
     </div>
 
-    <!-- Bottom Action Pill: Lyrics Toggle | AirPlay Output | Up Next Queue -->
+    <!-- Bottom Actions -->
     <div class="sheet-bottom-actions">
-      <!-- Lyrics Button -->
       <button class="sheet-action-pill" id="btn-toggle-lyrics" aria-label="Toggle Lyrics">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -572,7 +550,6 @@
         <span>Lyrics</span>
       </button>
 
-      <!-- AirPlay Audio Output Picker -->
       <button class="sheet-action-pill" id="btn-airplay" aria-label="AirPlay Audio Output">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
@@ -581,7 +558,6 @@
         <span id="airplay-label">iPhone Speaker</span>
       </button>
 
-      <!-- Up Next Queue -->
       <button class="sheet-action-pill" id="btn-toggle-queue" aria-label="Up Next Queue">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="8" y1="6" x2="21" y2="6"></line>
@@ -596,20 +572,18 @@
     </div>
   </div>
 
-  <!-- UP NEXT QUEUE OVERLAY MODAL -->
+  <!-- UP NEXT QUEUE SUBMODAL -->
   <div class="sheet-submodal" id="queue-submodal">
     <div class="submodal-content">
       <div class="submodal-header">
         <h3 class="submodal-title">Playing Next</h3>
         <button class="submodal-close-btn" id="btn-close-queue">Done</button>
       </div>
-      <div class="queue-list" id="queue-list-container">
-        <!-- Rendered via JS -->
-      </div>
+      <div class="queue-list" id="queue-list-container"></div>
     </div>
   </div>
 
-  <!-- EQUALIZER & AUDIO ENHANCEMENT MODAL -->
+  <!-- EQUALIZER MODAL -->
   <div class="sheet-submodal" id="eq-submodal">
     <div class="submodal-content">
       <div class="submodal-header">
@@ -621,7 +595,7 @@
         <div class="eq-toggle-row">
           <div>
             <span class="eq-label">Apple Spatial Audio Simulator</span>
-            <p class="eq-sub">Widens soundstage using 3D stereo binaural convolution</p>
+            <p class="eq-sub">Binaural 3D expansion with dynamic head room</p>
           </div>
           <label class="ios-switch">
             <input type="checkbox" id="toggle-spatial-switch" checked>
@@ -642,7 +616,7 @@
     </div>
   </div>
 
-  <!-- Hidden Native Audio Element -->
+  <!-- Hidden Native Audio -->
   <audio id="native-audio" crossorigin="anonymous" preload="auto"></audio>
 
   <script src="js/app.js"></script>

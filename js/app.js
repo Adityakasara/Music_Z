@@ -1,35 +1,249 @@
 /**
- * Music Z — Apple Music Web Experience (iOS & Safari Optimized)
+ * Music Z — Apple Music Experience (Live Telugu & Hindi Hits + iTunes Engine)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- Track Catalog & State ---
-  const TRACKS = [
+  // --- Preloaded Live Telugu, Hindi & Studio Hits ---
+  const PRELOADED_TRACKS = [
     {
-      id: 0,
+      id: 1761152593,
+      title: "Chuttamalle (Devara)",
+      artist: "Anirudh Ravichander, Shilpa Rao",
+      album: "Devara Part 1",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/86/7c/53/867c53cc-4efe-faef-a20e-8d9c896053db/8903431011411_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f9/28/29/f92829b4-5473-17a9-879a-2efe96b8f95b/mzaf_4766756883763132198.plus.aac.p.m4a",
+      category: "telugu",
+      duration: 222,
+      isSpatial: true,
+      colors: ["#fa243c", "#7928ca", "#0070f3"],
+      lyrics: [
+        { time: 0.0, text: "Chuttamalle chuttukuntive..." },
+        { time: 4.5, text: "Chupultho champestuntive..." },
+        { time: 9.0, text: "Gundelona premale nimpesthive" },
+        { time: 14.0, text: "Devara thalapu tho nindipothive" },
+        { time: 19.5, text: "Anirudh beats rock the coast" },
+        { time: 24.0, text: "Red sea whispers the warrior's ghost..." }
+      ]
+    },
+    {
+      id: 1748968097,
+      title: "Sooseki (Pushpa 2)",
+      artist: "Shreya Ghoshal & Chandrabose",
+      album: "Pushpa 2 The Rule",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/45/b6/2d/45b62dd5-8ae8-05ce-d145-2ec3b87510b9/8903431001597_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b0/81/bf/b081bf15-255d-8d74-5f3c-f0d6018895ed/mzaf_13394505028899957596.plus.aac.p.m4a",
+      category: "telugu",
+      duration: 260,
+      isSpatial: true,
+      colors: ["#ff9500", "#ff2d55", "#5c2483"],
+      lyrics: [
+        { time: 0.0, text: "Sooseki aggiravva laaga..." },
+        { time: 4.8, text: "Pilla nuvvu soopisthe lokaale maare" },
+        { time: 9.5, text: "Pushparaj rajyam shuru aindi" },
+        { time: 15.0, text: "Allu Arjun fire on screen" },
+        { time: 20.0, text: "Rule the world with red sanders gold..." }
+      ]
+    },
+    {
+      id: 1609924889,
+      title: "Kalaavathi (SVP)",
+      artist: "Sid Sriram & S.S. Thaman",
+      album: "Sarkaru Vaari Paata",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/dd/13/96/dd1396a1-fd23-693c-137a-b10047cc2b78/196626439680.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/47/2f/a0/472fa0e8-5643-6461-0653-56b87aa67fab/mzaf_17345742665182397098.plus.aac.p.m4a",
+      category: "telugu",
+      duration: 242,
+      isSpatial: true,
+      colors: ["#007aff", "#af52de", "#ff2d55"],
+      lyrics: [
+        { time: 0.0, text: "Vandhaa vaikuntalani..." },
+        { time: 4.2, text: "Choosinatte vundhi ro" },
+        { time: 8.8, text: "Kallu choosi kallu theristhe" },
+        { time: 13.5, text: "Kalaavathi kalalo kooda ninnu vidavane" },
+        { time: 18.0, text: "Sid Sriram soulful melody..." }
+      ]
+    },
+    {
+      id: 1721188759,
+      title: "Samayama (Hi Nanna)",
+      artist: "Anurag Kulkarni & Sithara",
+      album: "Hi Nanna",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/64/4c/1d/644c1db5-68f8-0640-21e2-dd440f7290e7/8903431963253_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/94/9c/a9/949ca9d4-d36e-5b77-bafa-2e5f7261423d/mzaf_3943643360697243799.plus.aac.p.m4a",
+      category: "telugu",
+      duration: 204,
+      isSpatial: true,
+      colors: ["#34c759", "#00c7be", "#007aff"],
+      lyrics: [
+        { time: 0.0, text: "Samayama samayama aagumaa..." },
+        { time: 5.0, text: "Tholi saari premalo munigina velalo" },
+        { time: 10.5, text: "Nani & Mrunal Thakur heart-touching moments" },
+        { time: 16.0, text: "Every second with you is a blessing" }
+      ]
+    },
+    {
+      id: 1634839886,
+      title: "Kesariya (Brahmāstra)",
+      artist: "Pritam & Arijit Singh",
+      album: "Brahmāstra",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/ca/84/c4/ca84c4a4-44df-9112-9c1c-a55152eb0393/8902894360341_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/58/b0/b2/58b0b2e8-d4c8-3c3e-f6bb-ca072fe41b31/mzaf_6382029519199347895.plus.aac.p.m4a",
+      category: "hindi",
+      duration: 268,
+      isSpatial: true,
+      colors: ["#ff9500", "#ff2d55", "#ffd60a"],
+      lyrics: [
+        { time: 0.0, text: "Kesariya tera ishq hai piya..." },
+        { time: 5.0, text: "Rang jaaun jo main haath lagaun" },
+        { time: 10.2, text: "Din beete saara teri fikr mein" },
+        { time: 15.5, text: "Rain saari teri khair manaun" },
+        { time: 20.0, text: "Arijit Singh magic in the air..." }
+      ]
+    },
+    {
+      id: 1705886367,
+      title: "Chaleya (Jawan)",
+      artist: "Anirudh Ravichander & Arijit Singh",
+      album: "Jawan",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/71/8d/68/718d6896-1875-c546-f947-fcfbe4744ae0/8903431952226_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/21/2e/8e/212e8e7c-ce73-518d-fcbe-7d04a60037a5/mzaf_13511739958043681424.plus.aac.p.m4a",
+      category: "hindi",
+      duration: 200,
+      isSpatial: true,
+      colors: ["#fa243c", "#af52de", "#007aff"],
+      lyrics: [
+        { time: 0.0, text: "Ishq mein dil bana hai, ishq mein dil fana hai..." },
+        { time: 5.2, text: "Chaleya teri ore chaleya" },
+        { time: 10.5, text: "Shah Rukh Khan & Nayanthara romance" },
+        { time: 16.0, text: "Groovy beats with breezy acoustic guitars" }
+      ]
+    },
+    {
+      id: 1650893041,
+      title: "Apna Bana Le",
+      artist: "Arijit Singh & Sachin-Jigar",
+      album: "Bhediya",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/72/7a/ff/727aff1c-b26a-93a9-9fc6-9486c73df569/8902894361546_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/d9/b4/2d/d9b42d72-46bb-9f20-b4d2-fdfcae00a394/mzaf_16198889417933924767.plus.aac.p.m4a",
+      category: "hindi",
+      duration: 261,
+      isSpatial: true,
+      colors: ["#af52de", "#5856d6", "#ff2d55"],
+      lyrics: [
+        { time: 0.0, text: "Tu mera koi na hoke bhi kuch laage..." },
+        { time: 5.0, text: "Kiya re jo bhi toone kaise kiya re" },
+        { time: 10.2, text: "Jiya ko mere baandh aise liya re" },
+        { time: 15.5, text: "Apna bana le piya, apna bana le piya..." }
+      ]
+    },
+    {
+      id: 635179213,
+      title: "Tum Hi Ho",
+      artist: "Mithoon & Arijit Singh",
+      album: "Aashiqui 2",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2b/ef/c7/2befc726-d62f-7629-5f2d-888e22d9ea1d/8901854005086.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/05/cf/a5/05cfa597-94e8-8a90-7c22-26cf287ecff4/mzaf_4116035038318854817.plus.aac.p.m4a",
+      category: "hindi",
+      duration: 262,
+      isSpatial: true,
+      colors: ["#007aff", "#5856d6", "#1c1c1e"],
+      lyrics: [
+        { time: 0.0, text: "Hum tere bin ab reh nahi sakte..." },
+        { time: 5.5, text: "Tere bina kya wajood mera" },
+        { time: 11.0, text: "Kyunki tum hi ho, ab tum hi ho" },
+        { time: 16.5, text: "Zindagi ab tum hi ho..." },
+        { time: 22.0, text: "Chain bhi mera dard bhi, meri aashiqui ab tum hi ho" }
+      ]
+    },
+    {
+      id: 1718130836,
+      title: "Pehle Bhi Main",
+      artist: "Vishal Mishra & Raj Shekhar",
+      album: "Animal",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a3/9b/a0/a39ba050-cbe6-96b6-a511-9659b72a6b22/8902894366626_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/23/94/ba/2394ba05-a868-b7eb-ba68-45a909be0d10/mzaf_10018868673752601264.plus.aac.p.m4a",
+      category: "hindi",
+      duration: 250,
+      isSpatial: true,
+      colors: ["#fa243c", "#3a3a3c", "#ffd60a"],
+      lyrics: [
+        { time: 0.0, text: "Pehle bhi main tumse mila hoon..." },
+        { time: 5.0, text: "Pehli dafa hi milke laga" },
+        { time: 10.0, text: "Tune chhua zakhmon ko mere" },
+        { time: 15.0, text: "Marham sa dono hathon pe laga..." }
+      ]
+    },
+    {
+      id: 1718130834,
+      title: "Satranga",
+      artist: "Arijit Singh, Shreyas Puranik",
+      album: "Animal",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a3/9b/a0/a39ba050-cbe6-96b6-a511-9659b72a6b22/8902894366626_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/1f/ee/7e/1fee7e8a-e9fa-a58f-2875-5fbe6089d71c/mzaf_12411037746416173007.plus.aac.p.m4a",
+      category: "hindi",
+      duration: 271,
+      isSpatial: true,
+      colors: ["#ff9500", "#fa243c", "#5856d6"],
+      lyrics: [
+        { time: 0.0, text: "Aadha ishq aadha hai aasmaan..." },
+        { time: 5.0, text: "Satranga bikhra sa dil ka jahaan" },
+        { time: 10.0, text: "Tere ishq mein dhoondha khuda..." }
+      ]
+    },
+    {
+      id: 1500000001,
+      title: "Ramuloo Ramulaa",
+      artist: "Anurag Kulkarni & Mangli",
+      album: "Ala Vaikunthapurramuloo",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c6/8e/3c/c68e3c4e-4f1d-dc2e-5a50-61d0d935e40d/8903431767660_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview114/v4/f4/f7/a9/f4f7a937-fc2a-3e15-8499-19ec024c3114/mzaf_17290940562235924773.plus.aac.p.m4a",
+      category: "telugu",
+      duration: 258,
+      isSpatial: true,
+      colors: ["#ffd60a", "#ff9500", "#fa243c"],
+      lyrics: [
+        { time: 0.0, text: "Ramuloo Ramulaa nannagadha rammulaa..." },
+        { time: 5.0, text: "Thaman S party mass celebration" },
+        { time: 10.0, text: "Allu Arjun iconic step" }
+      ]
+    },
+    {
+      id: 1500000002,
+      title: "Butta Bomma",
+      artist: "Armaan Malik & S.S. Thaman",
+      album: "Ala Vaikunthapurramuloo",
+      cover: "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c6/8e/3c/c68e3c4e-4f1d-dc2e-5a50-61d0d935e40d/8903431767660_cover.jpg/600x600bb.jpg",
+      audioUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview124/v4/ce/6b/df/ce6bdf8a-c852-518a-f5bb-3b7cce4beba8/mzaf_11306354316279402120.plus.aac.p.m4a",
+      category: "telugu",
+      duration: 198,
+      isSpatial: true,
+      colors: ["#ff2d55", "#ff9500", "#ff375f"],
+      lyrics: [
+        { time: 0.0, text: "Inkem inkem inkem kaavaale..." },
+        { time: 4.8, text: "Butta Bomma Butta Bomma nannu suthukuntive..." },
+        { time: 10.0, text: "Sensational viral chartbuster worldwide" }
+      ]
+    },
+    {
+      id: 9991,
       title: "Neon Horizon",
       artist: "Synthwave Dreams",
       album: "Neon Horizon",
       cover: "assets/covers/neon_horizon.jpg",
       audioUrl: "assets/audio/neon_horizon.wav",
-      category: "synthwave",
+      category: "lofi",
       duration: 35,
       colors: ["#fa243c", "#7928ca", "#0070f3"],
-      isSpatial: true,
       lyrics: [
-        { time: 0.0, text: "Neon lights reflecting on the boulevard" },
+        { time: 0, text: "Neon lights reflecting on the boulevard" },
         { time: 4.2, text: "Midnight city cruising under shooting stars" },
         { time: 8.5, text: "Bassline pulsing deep inside the night" },
-        { time: 13.0, text: "Synthesizers taking flight" },
-        { time: 17.2, text: "Every shadow turns to electric glow" },
-        { time: 21.5, text: "Nowhere to hide in the retro flow" },
-        { time: 26.0, text: "Lost in the horizon of neon dreams" },
-        { time: 30.5, text: "Nothing is ever quite as it seems..." }
+        { time: 13.0, text: "Synthesizers taking flight" }
       ]
     },
     {
-      id: 1,
+      id: 9992,
       title: "Midnight Session",
       artist: "Tokyo Rain",
       album: "Midnight Session",
@@ -38,57 +252,32 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "lofi",
       duration: 35,
       colors: ["#ff9500", "#ff2d55", "#5c2483"],
-      isSpatial: true,
       lyrics: [
-        { time: 0.0, text: "Rain falling softly against the glass" },
-        { time: 4.5, text: "A warm cup of coffee as minutes pass" },
-        { time: 9.0, text: "Vinyl spinning on a dusty needle" },
-        { time: 14.2, text: "Tokyo streets quiet and peaceful" },
-        { time: 19.0, text: "Lo-fi chords floating through the air" },
-        { time: 24.0, text: "Forget the noise, leave all the care" },
-        { time: 29.0, text: "Midnight whispers in golden light..." }
-      ]
-    },
-    {
-      id: 2,
-      title: "Celestial Mirage",
-      artist: "Cosmic Drift",
-      album: "Celestial Mirage",
-      cover: "assets/covers/celestial_mirage.jpg",
-      audioUrl: "assets/audio/celestial_mirage.wav",
-      category: "ambient",
-      duration: 35,
-      colors: ["#00f5d4", "#7b2cbf", "#f72585"],
-      isSpatial: true,
-      lyrics: [
-        { time: 0.0, text: "Floating into the iridescent deep" },
-        { time: 5.0, text: "Liquid spheres where memories sleep" },
-        { time: 10.5, text: "Starlight bending across the sphere" },
-        { time: 16.0, text: "Echoes of eternity drawing near" },
-        { time: 22.0, text: "Weightless drift through indigo skies" },
-        { time: 27.5, text: "Beyond the threshold where silence lies" }
+        { time: 0, text: "Rain falling softly against the glass" },
+        { time: 4.5, text: "Warm cup of coffee as minutes pass" }
       ]
     }
   ];
 
-  // App State
-  let playlist = [...TRACKS];
+  // State
+  let playlist = [...PRELOADED_TRACKS];
   let currentTrackIndex = 0;
   let isPlaying = false;
   let isShuffle = false;
   let isRepeat = false;
   let favorites = new Set(JSON.parse(localStorage.getItem('music_z_favs') || '[]'));
   let isLyricsMode = false;
-  let airplayDevices = ["iPhone Speaker", "AirPods Pro (2nd Gen)", "Living Room HomePod", "AirPods Max"];
+  let airplayDevices = ["iPhone Speaker", "AirPods Pro", "Living Room HomePod", "CarPlay"];
   let airplayIndex = 0;
+  let currentFilter = 'all';
 
-  // DOM Elements
+  // Audio & DOM Elements
   const audio = document.getElementById('native-audio');
   
-  // Viewport & Tabs
+  // Navigation
   const tabButtons = document.querySelectorAll('.tab-item');
   const tabPages = document.querySelectorAll('.tab-page');
-  
+
   // Mini Player
   const miniPlayer = document.getElementById('mini-player');
   const miniProgressFill = document.getElementById('mini-progress-fill');
@@ -112,14 +301,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const sheetFavBtn = document.getElementById('sheet-fav-btn');
   const heartOutline = sheetFavBtn.querySelector('.heart-outline');
   const heartSolid = sheetFavBtn.querySelector('.heart-solid');
-  
+
   // Seek Scrubber & Time
   const seekSlider = document.getElementById('sheet-seek-slider');
   const seekFill = document.getElementById('sheet-seek-fill');
   const currentTimeLabel = document.getElementById('current-time-label');
   const totalTimeLabel = document.getElementById('total-time-label');
 
-  // Sheet Controls
+  // Playback Controls
   const mainPlayPauseBtn = document.getElementById('btn-main-play-pause');
   const sheetPlayIcon = document.getElementById('sheet-play-icon');
   const sheetPauseIcon = document.getElementById('sheet-pause-icon');
@@ -132,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const volumeSlider = document.getElementById('sheet-volume-slider');
   const volumeFill = document.getElementById('sheet-volume-fill');
 
-  // Lyrics & AirPlay & Queue
+  // Lyrics, Airplay & Queue
   const btnToggleLyrics = document.getElementById('btn-toggle-lyrics');
   const sheetArtworkView = document.getElementById('sheet-artwork-view');
   const sheetLyricsView = document.getElementById('sheet-lyrics-view');
@@ -153,12 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Search & Library
   const searchInput = document.getElementById('search-input');
+  const searchSpinner = document.getElementById('search-spinner');
   const searchClearBtn = document.getElementById('search-clear-btn');
   const searchTrackList = document.getElementById('search-track-list');
   const searchTags = document.querySelectorAll('.search-tag');
   const localMusicInput = document.getElementById('local-music-input');
+  const langPills = document.querySelectorAll('.lang-pill');
 
-  // Web Audio Context & Nodes
+  // Web Audio Context
   let audioCtx = null;
   let sourceNode = null;
   let analyserNode = null;
@@ -175,20 +366,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let sheetAmbientCtx = sheetAmbientCanvas.getContext('2d');
   let visualizerCtx = visualizerCanvas.getContext('2d');
 
-  // Dynamic Liquid Blobs Simulation
+  // Fluid Mesh Animation Blobs
   let blobs = [
     { x: 0.3, y: 0.2, vx: 0.0012, vy: 0.0016, r: 0.45 },
     { x: 0.7, y: 0.3, vx: -0.0014, vy: 0.0011, r: 0.5 },
     { x: 0.4, y: 0.8, vx: 0.0015, vy: -0.0013, r: 0.42 },
     { x: 0.8, y: 0.7, vx: -0.0011, vy: -0.0015, r: 0.38 }
   ];
-  let currentColors = [...TRACKS[0].colors];
-  let targetColors = [...TRACKS[0].colors];
+  let currentColors = ["#fa243c", "#7928ca", "#0070f3"];
+  let targetColors = ["#fa243c", "#7928ca", "#0070f3"];
 
   function resizeCanvases() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    ambientCanvas.width = w / 2; // low-res for silky smooth blur
+    ambientCanvas.width = w / 2;
     ambientCanvas.height = h / 2;
     sheetAmbientCanvas.width = w / 2;
     sheetAmbientCanvas.height = h / 2;
@@ -200,25 +391,18 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', resizeCanvases);
   resizeCanvases();
 
-  // Animate Liquid Mesh Canvas
   function animateLiquidMesh() {
-    // Interpolate colors towards target colors
     for (let c = 0; c < 3; c++) {
-      // Lerp hex colors loosely
       currentColors[c] = targetColors[c];
     }
-
     const w = ambientCanvas.width;
     const h = ambientCanvas.height;
 
     [ambientCtx, sheetAmbientCtx].forEach(ctx => {
       ctx.clearRect(0, 0, w, h);
-
-      // Deep dark base
       ctx.fillStyle = '#06060a';
       ctx.fillRect(0, 0, w, h);
 
-      // Move & render blobs
       blobs.forEach((b, idx) => {
         b.x += b.vx;
         b.y += b.vy;
@@ -253,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  // --- Audio Context Initialization ---
+  // Web Audio Context
   function initAudioContext() {
     if (isWebAudioInitialized) return;
     try {
@@ -263,7 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
       analyserNode = audioCtx.createAnalyser();
       analyserNode.fftSize = 64;
 
-      // Equalizer Biquad Filters
       bassFilter = audioCtx.createBiquadFilter();
       bassFilter.type = 'lowshelf';
       bassFilter.frequency.value = 250;
@@ -272,7 +455,6 @@ document.addEventListener('DOMContentLoaded', () => {
       midFilter = audioCtx.createBiquadFilter();
       midFilter.type = 'peaking';
       midFilter.frequency.value = 1500;
-      midFilter.Q.value = 1;
       midFilter.gain.value = 0;
 
       trebleFilter = audioCtx.createBiquadFilter();
@@ -290,11 +472,10 @@ document.addEventListener('DOMContentLoaded', () => {
       isWebAudioInitialized = true;
       drawVisualizerSpectrum();
     } catch (e) {
-      console.warn("Web Audio API could not be connected:", e);
+      console.warn("Web Audio API:", e);
     }
   }
 
-  // Frequency spectrum drawer
   function drawVisualizerSpectrum() {
     requestAnimationFrame(drawVisualizerSpectrum);
     if (!analyserNode || !isPlaying) {
@@ -315,9 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < bufferLength; i++) {
       const barHeight = (dataArray[i] / 255) * h;
-      
       const grad = visualizerCtx.createLinearGradient(0, h - barHeight, 0, h);
-      grad.addColorStop(0, 'rgba(250, 36, 60, 0.9)');
+      grad.addColorStop(0, 'rgba(250, 36, 60, 0.95)');
       grad.addColorStop(1, 'rgba(175, 82, 222, 0.4)');
       
       visualizerCtx.fillStyle = grad;
@@ -349,13 +529,9 @@ document.addEventListener('DOMContentLoaded', () => {
     sheetTitle.textContent = track.title;
     sheetArtist.textContent = track.artist;
 
-    // Favorite state
     updateFavButton();
-
-    // Render Lyrics
     renderLyrics(track.lyrics);
 
-    // Active track row highlight
     document.querySelectorAll('.track-row').forEach(row => {
       row.classList.toggle('active', parseInt(row.dataset.id) === track.id);
     });
@@ -375,7 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isPlaying = true;
       updatePlayPauseUI(true);
     }).catch(err => {
-      console.warn("Autoplay blocked or waiting for user gesture:", err);
+      console.warn("Autoplay:", err);
       isPlaying = false;
       updatePlayPauseUI(false);
     });
@@ -433,10 +609,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- Audio Event Listeners ---
+  // --- Audio Events ---
   audio.addEventListener('timeupdate', () => {
     const cur = audio.currentTime;
-    const dur = audio.duration || playlist[currentTrackIndex].duration || 1;
+    const dur = audio.duration || playlist[currentTrackIndex]?.duration || 1;
     const pct = (cur / dur) * 100;
 
     miniProgressFill.style.width = `${pct}%`;
@@ -458,15 +634,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Slider Seek
   seekSlider.addEventListener('input', (e) => {
-    const dur = audio.duration || playlist[currentTrackIndex].duration || 1;
+    const dur = audio.duration || playlist[currentTrackIndex]?.duration || 1;
     const target = (e.target.value / 100) * dur;
     audio.currentTime = target;
     seekFill.style.width = `${e.target.value}%`;
   });
 
-  // Volume Slider
   volumeSlider.addEventListener('input', (e) => {
     const val = parseFloat(e.target.value);
     audio.volume = val;
@@ -474,7 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   volumeFill.style.width = `${volumeSlider.value * 100}%`;
 
-  // Controls Event Listeners
+  // Controls
   miniPlayPauseBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     togglePlayPause();
@@ -497,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
     repeatBtn.classList.toggle('active', isRepeat);
   });
 
-  // --- Full Screen Sheet Modal Animations ---
+  // Modal Sheet Animations
   miniExpandTrigger.addEventListener('click', () => {
     sheet.classList.add('expanded');
   });
@@ -506,7 +680,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sheet.classList.remove('expanded');
   });
 
-  // Swipe Down to Dismiss on iPhone
   let touchStartY = 0;
   sheetGrabberZone.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
@@ -519,11 +692,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  // --- Lyrics Mode ---
+  // Lyrics View
   function renderLyrics(lyrics) {
     lyricsScrollWrapper.innerHTML = '';
     if (!lyrics || lyrics.length === 0) {
-      lyricsScrollWrapper.innerHTML = '<div class="lyric-line active" style="margin-top:80px;">Instrumental track • Enjoy the music</div>';
+      lyricsScrollWrapper.innerHTML = `
+        <div class="lyric-line active" style="margin-top:60px; text-align:center;">
+          ${playlist[currentTrackIndex].title}<br>
+          <span style="font-size:16px; opacity:0.6;">Apple Music Lossless Audio</span>
+        </div>
+      `;
       return;
     }
 
@@ -532,7 +710,6 @@ document.addEventListener('DOMContentLoaded', () => {
       line.className = 'lyric-line';
       line.textContent = item.text;
       line.dataset.time = item.time;
-      line.dataset.index = index;
 
       line.addEventListener('click', () => {
         audio.currentTime = item.time;
@@ -560,7 +737,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (idx === activeIndex) {
         if (!line.classList.contains('active')) {
           line.classList.add('active');
-          // Smooth scroll active lyric into focus
           line.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       } else {
@@ -582,13 +758,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- AirPlay Device Picker ---
   btnAirplay.addEventListener('click', () => {
     airplayIndex = (airplayIndex + 1) % airplayDevices.length;
     airplayLabel.textContent = airplayDevices[airplayIndex];
   });
 
-  // --- Up Next Queue Modal ---
   btnToggleQueue.addEventListener('click', () => {
     renderQueueList();
     queueSubmodal.classList.add('open');
@@ -601,23 +775,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderQueueList() {
     queueListContainer.innerHTML = '';
     playlist.forEach((track, index) => {
-      const row = createTrackRow(track, index);
-      queueListContainer.appendChild(row);
+      queueListContainer.appendChild(createTrackRow(track, index));
     });
   }
 
-  // --- Equalizer & Spatial Audio Modal ---
+  // Equalizer
   btnEqToggle.addEventListener('click', () => {
     eqSubmodal.classList.add('open');
   });
-
   btnCloseEq.addEventListener('click', () => {
     eqSubmodal.classList.remove('open');
   });
 
   spatialSwitch.addEventListener('change', (e) => {
-    const enabled = e.target.checked;
-    document.getElementById('spatial-indicator').style.display = enabled ? 'inline-block' : 'none';
+    document.getElementById('spatial-indicator').style.display = e.target.checked ? 'inline-block' : 'none';
   });
 
   eqPresetBtns.forEach(btn => {
@@ -630,41 +801,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function applyEqPreset(preset) {
     if (!bassFilter) return;
-    switch(preset) {
-      case 'bass':
-        bassFilter.gain.value = 9;
-        midFilter.gain.value = 0;
-        trebleFilter.gain.value = 1;
-        break;
-      case 'vocal':
-        bassFilter.gain.value = -2;
-        midFilter.gain.value = 6;
-        trebleFilter.gain.value = 3;
-        break;
-      case 'electronic':
-        bassFilter.gain.value = 7;
-        midFilter.gain.value = -2;
-        trebleFilter.gain.value = 6;
-        break;
-      case 'acoustic':
-        bassFilter.gain.value = 3;
-        midFilter.gain.value = 3;
-        trebleFilter.gain.value = 4;
-        break;
-      case 'treble':
-        bassFilter.gain.value = -4;
-        midFilter.gain.value = 1;
-        trebleFilter.gain.value = 8;
-        break;
-      default: // flat
-        bassFilter.gain.value = 0;
-        midFilter.gain.value = 0;
-        trebleFilter.gain.value = 0;
-        break;
+    if (preset === 'bass') {
+      bassFilter.gain.value = 8; midFilter.gain.value = 0; trebleFilter.gain.value = 1;
+    } else if (preset === 'vocal') {
+      bassFilter.gain.value = -2; midFilter.gain.value = 6; trebleFilter.gain.value = 3;
+    } else if (preset === 'electronic') {
+      bassFilter.gain.value = 7; midFilter.gain.value = -2; trebleFilter.gain.value = 6;
+    } else if (preset === 'acoustic') {
+      bassFilter.gain.value = 3; midFilter.gain.value = 3; trebleFilter.gain.value = 4;
+    } else if (preset === 'treble') {
+      bassFilter.gain.value = -4; midFilter.gain.value = 1; trebleFilter.gain.value = 8;
+    } else {
+      bassFilter.gain.value = 0; midFilter.gain.value = 0; trebleFilter.gain.value = 0;
     }
   }
 
-  // --- Favorite Toggle ---
+  // Favorites
   sheetFavBtn.addEventListener('click', () => {
     const track = playlist[currentTrackIndex];
     if (favorites.has(track.id)) {
@@ -684,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
     heartSolid.style.display = isFav ? 'block' : 'none';
   }
 
-  // --- Tab Navigation ---
+  // Tab Navigation
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.dataset.tab;
@@ -698,64 +850,99 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Hero Card Play Buttons
-  document.querySelectorAll('.hero-play-pill-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const trackId = parseInt(btn.dataset.playTrack);
-      loadTrack(trackId, true);
-    });
-  });
-
-  // Hero Card Clicks
-  document.querySelectorAll('.hero-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const trackId = parseInt(card.dataset.trackId);
-      loadTrack(trackId, true);
-    });
-  });
-
-  // Radio Play Button
   document.getElementById('btn-play-radio-1').addEventListener('click', () => {
     loadTrack(0, true);
   });
 
-  // --- Render Sections ---
-  function renderCatalog() {
-    // 1. Top Picks
-    const topPicksRow = document.getElementById('top-picks-row');
-    topPicksRow.innerHTML = '';
-    playlist.forEach((track, idx) => {
-      const card = createCard(track, idx);
-      topPicksRow.appendChild(card);
+  // --- Render Functions ---
+  function renderAll() {
+    renderHeroCarousel();
+    renderLanguageSections();
+    renderHeavyRotation();
+    renderBrowseTracks();
+    renderRadioStations();
+    renderLibraryTracks();
+  }
+
+  function renderHeroCarousel() {
+    const carousel = document.getElementById('hero-carousel');
+    carousel.innerHTML = '';
+
+    // Take first 3 tracks
+    const heroTracks = playlist.slice(0, 3);
+    heroTracks.forEach((track, idx) => {
+      const card = document.createElement('div');
+      card.className = 'hero-card';
+      card.innerHTML = `
+        <div class="hero-card-art-wrap">
+          <img src="${track.cover}" alt="${track.title}" class="hero-art-img">
+          <div class="hero-glass-badge">${track.category.toUpperCase()} HIT</div>
+        </div>
+        <div class="hero-meta">
+          <span class="hero-subtitle">NOW TRENDING • ${track.artist.toUpperCase()}</span>
+          <h2 class="hero-title">${track.title}</h2>
+          <p class="hero-desc">${track.album} • Streamed in Apple Lossless</p>
+          <button class="hero-play-pill-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Play</span>
+          </button>
+        </div>
+      `;
+      card.querySelector('.hero-play-pill-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        loadTrack(idx, true);
+      });
+      card.addEventListener('click', () => {
+        loadTrack(idx, true);
+      });
+      carousel.appendChild(card);
+    });
+  }
+
+  function renderLanguageSections() {
+    const teluguRow = document.getElementById('telugu-row');
+    const hindiRow = document.getElementById('hindi-row');
+    teluguRow.innerHTML = '';
+    hindiRow.innerHTML = '';
+
+    playlist.filter(t => t.category === 'telugu').forEach(track => {
+      const idx = playlist.indexOf(track);
+      teluguRow.appendChild(createCard(track, idx));
     });
 
-    // 2. Heavy Rotation
+    playlist.filter(t => t.category === 'hindi').forEach(track => {
+      const idx = playlist.indexOf(track);
+      hindiRow.appendChild(createCard(track, idx));
+    });
+  }
+
+  function renderHeavyRotation() {
     const heavyGrid = document.getElementById('heavy-rotation-grid');
     heavyGrid.innerHTML = '';
-    playlist.forEach((track, idx) => {
-      const card = createCard(track, idx);
-      heavyGrid.appendChild(card);
+    playlist.slice(0, 8).forEach(track => {
+      const idx = playlist.indexOf(track);
+      heavyGrid.appendChild(createCard(track, idx));
     });
+  }
 
-    // 3. Browse track list
+  function renderBrowseTracks() {
     const browseList = document.getElementById('browse-track-list');
     browseList.innerHTML = '';
-    playlist.forEach((track, idx) => {
-      const row = createTrackRow(track, idx);
-      browseList.appendChild(row);
+    playlist.slice(0, 10).forEach(track => {
+      const idx = playlist.indexOf(track);
+      browseList.appendChild(createTrackRow(track, idx));
     });
+  }
 
-    // 4. Radio stations
+  function renderRadioStations() {
     const radioRow = document.getElementById('radio-stations-row');
     radioRow.innerHTML = '';
-    playlist.forEach((track, idx) => {
-      const card = createCard(track, idx);
-      radioRow.appendChild(card);
+    playlist.slice(0, 6).forEach(track => {
+      const idx = playlist.indexOf(track);
+      radioRow.appendChild(createCard(track, idx));
     });
-
-    // 5. Library
-    renderLibraryTracks();
   }
 
   function createCard(track, index) {
@@ -764,6 +951,7 @@ document.addEventListener('DOMContentLoaded', () => {
     card.innerHTML = `
       <div class="card-art-box">
         <img src="${track.cover}" alt="${track.title}" class="card-art-img" loading="lazy">
+        <span class="card-lang-tag">${track.category || 'Hit'}</span>
         <div class="card-play-hover">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
             <polygon points="6 4 18 12 6 20 6 4"></polygon>
@@ -783,6 +971,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.createElement('div');
     row.className = `track-row ${index === currentTrackIndex ? 'active' : ''}`;
     row.dataset.id = track.id;
+    
+    let langBadge = '';
+    if (track.category === 'telugu') {
+      langBadge = '<span class="telugu-tag-tiny">TELUGU</span>';
+    } else if (track.category === 'hindi') {
+      langBadge = '<span class="hindi-tag-tiny">HINDI</span>';
+    }
+
     row.innerHTML = `
       <div class="track-row-art">
         <img src="${track.cover}" alt="${track.title}" loading="lazy">
@@ -791,7 +987,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="track-row-title">${track.title}</div>
         <div class="track-row-meta">
           <span>${track.artist}</span>
-          ${track.isSpatial ? '<span class="spatial-badge-tiny">SPATIAL</span>' : ''}
+          ${langBadge}
+          <span class="spatial-badge-tiny">LOSSLESS</span>
         </div>
       </div>
       <button class="track-row-more">
@@ -815,12 +1012,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let filtered = playlist;
     if (filter === 'favorite') {
       filtered = playlist.filter(t => favorites.has(t.id));
-    } else if (filter === 'uploaded') {
-      filtered = playlist.filter(t => t.isUploaded);
+    } else if (filter === 'telugu') {
+      filtered = playlist.filter(t => t.category === 'telugu');
+    } else if (filter === 'hindi') {
+      filtered = playlist.filter(t => t.category === 'hindi');
     }
 
     if (filtered.length === 0) {
-      libList.innerHTML = '<div style="padding:24px; text-align:center; color:rgba(255,255,255,0.4);">No songs found in this category.</div>';
+      libList.innerHTML = '<div style="padding:24px; text-align:center; color:rgba(255,255,255,0.4);">No songs in this view yet.</div>';
       return;
     }
 
@@ -830,69 +1029,157 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Library Filter clicks
+  // Language Filter Pills Click
+  langPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      langPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const lang = pill.dataset.lang;
+      currentFilter = lang;
+
+      const secTelugu = document.getElementById('section-telugu-block');
+      const secHindi = document.getElementById('section-hindi-block');
+
+      if (lang === 'telugu') {
+        secTelugu.style.display = 'block';
+        secHindi.style.display = 'none';
+      } else if (lang === 'hindi') {
+        secTelugu.style.display = 'none';
+        secHindi.style.display = 'block';
+      } else {
+        secTelugu.style.display = 'block';
+        secHindi.style.display = 'block';
+      }
+    });
+  });
+
+  // Library links
   document.querySelectorAll('.library-row-item').forEach(item => {
     item.addEventListener('click', () => {
       renderLibraryTracks(item.dataset.libFilter);
     });
   });
 
-  // --- Search Input Filter ---
-  let activeTag = 'all';
+  // --- LIVE ITUNES API SEARCH (Telugu & Hindi Hits) ---
+  let searchDebounceTimer = null;
 
-  function filterSearch() {
-    const query = searchInput.value.toLowerCase().trim();
-    searchClearBtn.style.display = query ? 'flex' : 'none';
-
-    const results = playlist.filter(track => {
-      const matchesTag = activeTag === 'all' || track.category === activeTag;
-      const matchesQuery = !query || 
-        track.title.toLowerCase().includes(query) ||
-        track.artist.toLowerCase().includes(query) ||
-        (track.lyrics && track.lyrics.some(l => l.text.toLowerCase().includes(query)));
-      return matchesTag && matchesQuery;
-    });
-
-    searchTrackList.innerHTML = '';
-    if (results.length === 0) {
-      searchTrackList.innerHTML = '<div style="padding:32px; text-align:center; color:rgba(255,255,255,0.4);">No matching tracks or lyrics found.</div>';
+  async function performLiveSearch(query) {
+    if (!query) {
+      renderDefaultSearchResults();
       return;
     }
 
-    results.forEach(track => {
-      const idx = playlist.indexOf(track);
+    searchSpinner.style.display = 'inline-block';
+
+    try {
+      const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&limit=25`;
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      searchSpinner.style.display = 'none';
+      searchTrackList.innerHTML = '';
+
+      if (!data.results || data.results.length === 0) {
+        searchTrackList.innerHTML = `<div style="padding:32px; text-align:center; color:rgba(255,255,255,0.4);">No live tracks found for "${query}".</div>`;
+        return;
+      }
+
+      data.results.forEach(item => {
+        if (!item.previewUrl) return;
+
+        const art = (item.artworkUrl100 || '').replace('100x100bb', '600x600bb');
+        const isTelugu = item.primaryGenreName?.includes('Telugu') || query.toLowerCase().includes('telugu') || /devara|pushpa|kushi|hi nanna/i.test(item.trackName);
+        const isHindi = item.primaryGenreName?.includes('Bollywood') || query.toLowerCase().includes('hindi') || /arijit|animal|brahmastra|jawan/i.test(item.trackName);
+
+        const trackObj = {
+          id: item.trackId,
+          title: item.trackName,
+          artist: item.artistName,
+          album: item.collectionName || 'Single',
+          cover: art,
+          audioUrl: item.previewUrl,
+          category: isTelugu ? 'telugu' : (isHindi ? 'hindi' : 'live'),
+          duration: Math.round((item.trackTimeMillis || 30000) / 1000),
+          isSpatial: true,
+          colors: isTelugu ? ["#fa243c", "#ff9500", "#7928ca"] : ["#af52de", "#007aff", "#fa243c"],
+          lyrics: [
+            { time: 0, text: item.trackName },
+            { time: 5, text: `By ${item.artistName}` },
+            { time: 10, text: `From ${item.collectionName || 'Single'}` },
+            { time: 15, text: "Streaming live with Apple Lossless quality" }
+          ]
+        };
+
+        // Add to main playlist if not already there
+        if (!playlist.some(p => p.id === trackObj.id)) {
+          playlist.push(trackObj);
+        }
+
+        const idx = playlist.findIndex(p => p.id === trackObj.id);
+        searchTrackList.appendChild(createTrackRow(trackObj, idx));
+      });
+
+    } catch (e) {
+      console.warn("Live iTunes Search Error:", e);
+      searchSpinner.style.display = 'none';
+      searchTrackList.innerHTML = `<div style="padding:32px; text-align:center; color:rgba(255,255,255,0.4);">Connection error. Showing offline library tracks.</div>`;
+    }
+  }
+
+  function renderDefaultSearchResults() {
+    searchTrackList.innerHTML = '';
+    playlist.forEach((track, idx) => {
       searchTrackList.appendChild(createTrackRow(track, idx));
     });
   }
 
-  searchInput.addEventListener('input', filterSearch);
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim();
+    searchClearBtn.style.display = q ? 'flex' : 'none';
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => {
+      performLiveSearch(q);
+    }, 350);
+  });
+
   searchClearBtn.addEventListener('click', () => {
     searchInput.value = '';
-    filterSearch();
+    searchClearBtn.style.display = 'none';
+    renderDefaultSearchResults();
   });
 
   searchTags.forEach(tag => {
     tag.addEventListener('click', () => {
       searchTags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
-      activeTag = tag.dataset.tag;
-      filterSearch();
+      const q = tag.dataset.query;
+      if (q === 'all') {
+        searchInput.value = '';
+        renderDefaultSearchResults();
+      } else {
+        searchInput.value = q;
+        searchClearBtn.style.display = 'flex';
+        performLiveSearch(q);
+      }
     });
   });
 
-  // Browse category clicks
+  // Browse category cards click
   document.querySelectorAll('.browse-cat-card').forEach(card => {
     card.addEventListener('click', () => {
       const cat = card.dataset.filter;
-      // Switch to search with tag
-      const searchTabBtn = document.querySelector('[data-tab="tab-search"]');
-      searchTabBtn.click();
-      const matchingTag = document.querySelector(`.search-tag[data-tag="${cat}"]`);
-      if (matchingTag) matchingTag.click();
+      document.querySelector('[data-tab="tab-search"]').click();
+      if (cat === 'telugu') {
+        searchInput.value = 'Telugu Hits';
+        performLiveSearch('telugu hits');
+      } else if (cat === 'hindi') {
+        searchInput.value = 'Bollywood Hits';
+        performLiveSearch('bollywood hits');
+      }
     });
   });
 
-  // --- Custom Audio Upload from iPhone / Mac ---
+  // Custom File Import
   localMusicInput.addEventListener('change', (e) => {
     const files = Array.from(e.target.files);
     if (!files.length) return;
@@ -900,37 +1187,31 @@ document.addEventListener('DOMContentLoaded', () => {
     files.forEach((file, i) => {
       const url = URL.createObjectURL(file);
       const nameParts = file.name.replace(/\.[^/.]+$/, "").split(" - ");
-      const artist = nameParts.length > 1 ? nameParts[0].trim() : "Imported Music";
+      const artist = nameParts.length > 1 ? nameParts[0].trim() : "Local Audio";
       const title = nameParts.length > 1 ? nameParts[1].trim() : nameParts[0].trim();
 
       const newTrack = {
         id: Date.now() + i,
         title: title,
         artist: artist,
-        album: "iPhone Library",
+        album: "Imported Files",
         cover: "assets/covers/neon_horizon.jpg",
         audioUrl: url,
-        category: "uploaded",
+        category: "local",
         duration: 0,
         colors: ["#fa243c", "#007aff", "#af52de"],
-        isSpatial: true,
-        isUploaded: true,
-        lyrics: [
-          { time: 0, text: `Imported audio: ${title}` },
-          { time: 5, text: "Playing your local music with Apple Music audio effects" }
-        ]
+        isSpatial: true
       };
 
       playlist.unshift(newTrack);
     });
 
-    renderCatalog();
+    renderAll();
     loadTrack(0, true);
-    // Switch to library
     document.querySelector('[data-tab="tab-library"]').click();
   });
 
-  // --- Keyboard Shortcuts (Mac Safari / Desktop) ---
+  // Keyboard Shortcuts
   window.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT') return;
     if (e.code === 'Space') {
@@ -940,18 +1221,9 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.currentTime = Math.min(audio.currentTime + 5, audio.duration || 999);
     } else if (e.code === 'ArrowLeft') {
       audio.currentTime = Math.max(audio.currentTime - 5, 0);
-    } else if (e.code === 'ArrowUp') {
-      audio.volume = Math.min(audio.volume + 0.1, 1);
-      volumeSlider.value = audio.volume;
-      volumeFill.style.width = `${audio.volume * 100}%`;
-    } else if (e.code === 'ArrowDown') {
-      audio.volume = Math.max(audio.volume - 0.1, 0);
-      volumeSlider.value = audio.volume;
-      volumeFill.style.width = `${audio.volume * 100}%`;
     }
   });
 
-  // Utility: Time Formatter
   function formatTime(seconds) {
     if (isNaN(seconds) || seconds < 0) return "0:00";
     const m = Math.floor(seconds / 60);
@@ -959,8 +1231,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   }
 
-  // Initial Load
-  renderCatalog();
-  filterSearch();
+  // Boot
+  renderAll();
+  renderDefaultSearchResults();
   loadTrack(0, false);
 });

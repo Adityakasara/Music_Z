@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Apple Music Design System — iOS & Web
+   Apple Music Design System — iOS & Web (Music Z)
    ========================================================================== */
 
 :root {
@@ -7,8 +7,8 @@
   --bg-base: #000000;
   --bg-card: rgba(255, 255, 255, 0.08);
   --bg-card-hover: rgba(255, 255, 255, 0.14);
-  --bg-glass: rgba(22, 22, 28, 0.75);
-  --bg-glass-heavy: rgba(14, 14, 18, 0.88);
+  --bg-glass: rgba(20, 20, 26, 0.8);
+  --bg-glass-heavy: rgba(14, 14, 18, 0.92);
   --border-glass: rgba(255, 255, 255, 0.12);
   --border-light: rgba(255, 255, 255, 0.06);
 
@@ -16,8 +16,9 @@
   --accent-apple-gradient: linear-gradient(135deg, #fa233b 0%, #fb5c74 100%);
   --accent-purple: #af52de;
   --accent-blue: #0a84ff;
+  --accent-orange: #ff9500;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.64);
+  --text-secondary: rgba(255, 255, 255, 0.65);
   --text-tertiary: rgba(255, 255, 255, 0.38);
 
   --tab-bar-height: 84px;
@@ -76,8 +77,8 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 30%, rgba(12, 12, 18, 0.3) 0%, rgba(5, 5, 8, 0.85) 100%),
-              rgba(0, 0, 0, 0.45);
+  background: radial-gradient(circle at 50% 30%, rgba(12, 12, 18, 0.35) 0%, rgba(5, 5, 8, 0.9) 100%),
+              rgba(0, 0, 0, 0.48);
   pointer-events: none;
   z-index: 1;
 }
@@ -88,13 +89,13 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(8, 8, 12, 0.45) 0%, rgba(5, 5, 8, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(8, 8, 12, 0.42) 0%, rgba(5, 5, 8, 0.92) 100%);
   pointer-events: none;
   z-index: 0;
 }
 
 /* ==========================================================================
-   Viewport Structure (Safe Area Aware)
+   Viewport Structure (iPhone Frame & Desktop Responsive)
    ========================================================================== */
 .app-viewport {
   position: relative;
@@ -104,14 +105,14 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-width: 600px; /* iPhone container width on desktop, 100% on phone */
+  max-width: 600px;
   margin: 0 auto;
 }
 
 @media (min-width: 1024px) {
   .app-viewport {
-    max-width: 820px;
-    box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+    max-width: 860px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.85);
     border-left: 1px solid var(--border-light);
     border-right: 1px solid var(--border-light);
   }
@@ -124,9 +125,11 @@ html, body {
   flex-shrink: 0;
 }
 
-/* Header */
+/* ==========================================================================
+   Apple Music Brand Header & Logo Lockup
+   ========================================================================== */
 .app-header {
-  height: 52px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,20 +138,82 @@ html, body {
   z-index: 10;
 }
 
-.header-left .apple-logo-badge {
+.app-brand-lockup {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-  color: #fff;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.app-logo-squircle {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(250, 36, 60, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brand-text-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brand-title {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+.brand-badge-z {
+  font-size: 11px;
+  font-weight: 900;
+  color: #ffffff;
+  background: linear-gradient(135deg, #fa243c 0%, #af52de 100%);
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(250, 36, 60, 0.4);
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.live-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #fff;
+  background: rgba(250, 36, 60, 0.22);
+  border: 1px solid rgba(250, 36, 60, 0.5);
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.live-dot-mini {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34c759;
+  box-shadow: 0 0 6px #34c759;
+  animation: pulseDot 1.4s infinite;
 }
 
 .header-icon-btn {
@@ -215,7 +280,7 @@ html, body {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .page-large-title {
@@ -238,8 +303,45 @@ html, body {
   backdrop-filter: blur(10px);
 }
 
+/* Language Filter Pills */
+.lang-pills-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.lang-pills-row::-webkit-scrollbar {
+  display: none;
+}
+
+.lang-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 15px;
+  border-radius: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.lang-pill.active {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.lang-pill:active {
+  transform: scale(0.95);
+}
+
 /* ==========================================================================
-   Hero Carousel (Apple Music Top Feature)
+   Hero Carousel
    ========================================================================== */
 .hero-carousel-container {
   margin-bottom: 26px;
@@ -267,8 +369,9 @@ html, body {
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: transform var(--transition-fast);
+  cursor: pointer;
 }
 
 .hero-card:active {
@@ -280,6 +383,7 @@ html, body {
   height: 220px;
   position: relative;
   overflow: hidden;
+  background: #111;
 }
 
 .hero-art-img {
@@ -293,20 +397,21 @@ html, body {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: #fff;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.8px;
   padding: 4px 9px;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .hero-meta {
   padding: 16px;
-  background: linear-gradient(180deg, rgba(20, 20, 28, 0.6) 0%, rgba(14, 14, 20, 0.95) 100%);
+  background: linear-gradient(180deg, rgba(20, 20, 28, 0.6) 0%, rgba(14, 14, 20, 0.98) 100%);
   position: relative;
 }
 
@@ -320,10 +425,13 @@ html, body {
 }
 
 .hero-title {
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.3px;
   margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hero-desc {
@@ -331,6 +439,9 @@ html, body {
   color: var(--text-secondary);
   line-height: 1.4;
   margin-bottom: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hero-play-pill-btn {
@@ -394,7 +505,7 @@ html, body {
   display: none;
 }
 
-/* Standard Track Card */
+/* Track Card */
 .track-card {
   flex: 0 0 148px;
   cursor: pointer;
@@ -411,7 +522,7 @@ html, body {
   border-radius: var(--radius-md);
   overflow: hidden;
   position: relative;
-  background: #111;
+  background: #15151e;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   margin-bottom: 8px;
 }
@@ -427,6 +538,21 @@ html, body {
   transform: scale(1.04);
 }
 
+.card-lang-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  text-transform: uppercase;
+}
+
 .card-play-hover {
   position: absolute;
   right: 10px;
@@ -434,14 +560,14 @@ html, body {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.9;
+  opacity: 0.92;
   transition: transform var(--transition-fast);
 }
 
@@ -484,7 +610,7 @@ html, body {
   aspect-ratio: 1/1;
 }
 
-/* Track List (Apple Music style rows) */
+/* Track List */
 .track-list {
   display: flex;
   flex-direction: column;
@@ -505,16 +631,17 @@ html, body {
 }
 
 .track-row.active {
-  background: rgba(250, 36, 60, 0.12);
+  background: rgba(250, 36, 60, 0.14);
 }
 
 .track-row-art {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
   margin-right: 12px;
+  background: #1a1a22;
 }
 
 .track-row-art img {
@@ -554,10 +681,30 @@ html, body {
 
 .spatial-badge-tiny {
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 1px 4px;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.telugu-tag-tiny {
+  font-size: 9px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255, 149, 0, 0.35);
+  border: 1px solid rgba(255, 149, 0, 0.6);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.hindi-tag-tiny {
+  font-size: 9px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(250, 36, 60, 0.35);
+  border: 1px solid rgba(250, 36, 60, 0.6);
+  padding: 1px 5px;
   border-radius: 3px;
 }
 
@@ -600,17 +747,17 @@ html, body {
   transform: scale(0.97);
 }
 
-.cat-spatial {
-  background: linear-gradient(135deg, #af52de 0%, #007aff 100%);
-}
-.cat-lofi {
+.cat-telugu {
   background: linear-gradient(135deg, #ff9500 0%, #ff2d55 100%);
 }
-.cat-electronic {
-  background: linear-gradient(135deg, #00c7be 0%, #30b0c7 100%);
+.cat-hindi {
+  background: linear-gradient(135deg, #af52de 0%, #fa243c 100%);
 }
-.cat-focus {
-  background: linear-gradient(135deg, #5856d6 0%, #34c759 100%);
+.cat-spatial {
+  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+}
+.cat-lofi {
+  background: linear-gradient(135deg, #00c7be 0%, #30b0c7 100%);
 }
 
 /* ==========================================================================
@@ -662,7 +809,7 @@ html, body {
 
 .radio-station-desc {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.4;
   margin-bottom: 18px;
 }
@@ -739,13 +886,8 @@ html, body {
   color: #fff;
 }
 
-.lib-row-icon.icon-pink {
-  color: var(--accent-apple-pink);
-}
-
-.lib-row-icon.icon-blue {
-  color: var(--accent-blue);
-}
+.lib-row-icon.icon-pink { color: var(--accent-apple-pink); }
+.lib-row-icon.icon-orange { color: var(--accent-orange); }
 
 .lib-row-text {
   flex: 1;
@@ -759,10 +901,10 @@ html, body {
 }
 
 /* ==========================================================================
-   Search Input (iOS Style)
+   Search Input (iOS Style) & Live Search
    ========================================================================== */
 .search-bar-wrap {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .search-input-box {
@@ -786,12 +928,26 @@ html, body {
   border: none;
   outline: none;
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
   font-family: var(--font-family);
 }
 
 .search-input-box input::placeholder {
   color: var(--text-secondary);
+}
+
+.search-loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent-apple-pink);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .search-clear-btn {
@@ -813,7 +969,7 @@ html, body {
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 6px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .search-tags-row::-webkit-scrollbar {
@@ -837,6 +993,13 @@ html, body {
   background: #fff;
   color: #000;
   font-weight: 700;
+}
+
+.search-meta-banner {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  padding: 0 4px;
 }
 
 .bottom-page-padding {
@@ -904,6 +1067,7 @@ html, body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
   margin-right: 10px;
+  background: #111;
 }
 
 .mini-meta {
@@ -1003,7 +1167,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Full Screen Expanded Now Playing Sheet (iOS Apple Music Modal)
+   Full Screen Expanded Now Playing Sheet
    ========================================================================== */
 .now-playing-sheet {
   position: fixed;
@@ -1027,7 +1191,6 @@ html, body {
   transform: translateY(0);
 }
 
-/* Pull Down Grabber Bar */
 .sheet-grabber-zone {
   display: flex;
   justify-content: center;
@@ -1043,7 +1206,6 @@ html, body {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* Top Nav */
 .sheet-top-nav {
   display: flex;
   align-items: center;
@@ -1093,7 +1255,6 @@ html, body {
   border-color: rgba(175, 82, 222, 0.5);
 }
 
-/* Main Display Area (Swaps between Artwork and Lyrics) */
 .sheet-main-display {
   flex: 1;
   position: relative;
@@ -1124,8 +1285,9 @@ html, body {
   aspect-ratio: 1/1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(250, 36, 60, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(250, 36, 60, 0.25);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: #111;
 }
 
 .sheet-art-shadow-box.playing {
@@ -1142,7 +1304,7 @@ html, body {
   object-fit: cover;
 }
 
-/* Time-Synced Lyrics Mode (Apple Music Sing / Karaoke) */
+/* Time-Synced Lyrics Mode */
 .lyrics-view-container {
   width: 100%;
   height: 100%;
@@ -1315,7 +1477,7 @@ html, body {
   margin-top: -2px;
 }
 
-/* Playback Control Bar */
+/* Playback Controls */
 .sheet-playback-controls {
   display: flex;
   align-items: center;
@@ -1423,9 +1585,7 @@ html, body {
   border-color: #fff;
 }
 
-/* ==========================================================================
-   Submodals (Queue & Equalizer)
-   ========================================================================== */
+/* Submodals */
 .sheet-submodal {
   position: absolute;
   top: 0;
@@ -1484,7 +1644,7 @@ html, body {
   gap: 4px;
 }
 
-/* EQ Modal Styling */
+/* Equalizer */
 .eq-section {
   display: flex;
   flex-direction: column;
@@ -1513,7 +1673,6 @@ html, body {
   margin-top: 2px;
 }
 
-/* iOS Switch */
 .ios-switch {
   position: relative;
   display: inline-block;
